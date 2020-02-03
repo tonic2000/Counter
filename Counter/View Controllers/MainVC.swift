@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
+    @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var sortButton: UIBarButtonItem!
     
@@ -37,49 +38,60 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         super.viewDidLoad()
         eventTableView.dataSource = self
         eventTableView.delegate = self
-      
+    
        
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddEventSegue" {
-            guard  let destVC = segue.destination as? NewEventTableVC else { return }
+       
+        switch segue.identifier  {
+        case Helper.addButtonSegue:
+              guard  let destVC = segue.destination as? NewEventTableVC else { return }
             destVC.delegate = self
             destVC.eventController = eventController
+            
+      
+        default:
+            break
         }
+ 
     }
 
 
     @IBAction func addTapped(_ sender: UIButton) {
+        //Segue 
     }
     
     
     @IBAction func sortTapped(_ sender: UIBarButtonItem) {
-
+        
         switch sender.title {
         case "Sort":
             showAlert()
+            
         default:
             sender.title = "Sort"
             eventTableView.isEditing = false
+             addButton.isEnabled = true
         }
        
        
     }
     
-   private func showAlert() {
+    private func showAlert() {
         let ac = UIAlertController(title: "SORT EVENTS", message: nil, preferredStyle: .actionSheet)
-    
-               ac.addAction(UIAlertAction(title: "Sort alphabetically", style: .default, handler: { (action) in
-                   self.eventController.events.sort(by: > )
-                   self.eventTableView.reloadData()
-               }))
-             ac.addAction(UIAlertAction(title: "Sort from Soonest to Furthest", style: .default, handler: nil))
-                ac.addAction(UIAlertAction(title: "Sort manually", style: .default, handler: moveCell(action:)))
- 
-               ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-    
-               present(ac, animated: true, completion: nil)
+        
+        ac.addAction(UIAlertAction(title: "Sort alphabetically", style: .default, handler: { (action) in
+            self.eventController.events.sort(by: > )
+            self.eventTableView.reloadData()
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Sort from Soonest to Furthest", style: .default, handler: nil))
+        ac.addAction(UIAlertAction(title: "Sort manually", style: .default, handler: moveCell(action:)))
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        
+        present(ac, animated: true, completion: nil)
     }
     
     
@@ -87,7 +99,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     
    private func moveCell(action: UIAlertAction) {
-
+    addButton.isEnabled = false
         self.eventTableView.isEditing.toggle()
         switch eventTableView.isEditing {
         case true:
@@ -108,16 +120,20 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell123", for: indexPath) as? EventCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell123", for: indexPath) as? EventCell else
+        {
             return UITableViewCell()
         }
+        
+         let event = eventController.events[indexPath.row] //
         cell.event = event
+       
        
         return cell
         
     }
     
-    
+  //Swipe to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             eventController.events.remove(at: indexPath.row)
@@ -126,7 +142,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
    
-
+//Move cell
      func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -139,5 +155,9 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         let movedObject = self.eventController.events[sourceIndexPath.row]
         eventController.events.remove(at: sourceIndexPath.row)
         eventController.events.insert(movedObject, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
