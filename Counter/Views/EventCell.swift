@@ -9,13 +9,19 @@
 import UIKit
 
 class EventCell: UITableViewCell {
-
     
-    var event: Event? {
-        didSet {
-            updateViews()
-        }
+    
+  private  func updateViews() {
+        guard let event = event else { return }
+        eventNameLabel.text = event.name
+        emojiLabel.text = event.emoji
+        eventDateLabel.text = dateFormatter.string(from: event.date)
+        eventDaysLeft.text = "\(event.daysLeft) days left"
+        
     }
+    
+   
+    
     
     private var dateFormatter: DateFormatter = {
            let formatter = DateFormatter()
@@ -31,16 +37,12 @@ class EventCell: UITableViewCell {
     
     
   
+     var event: Event? {
+         didSet {
+             updateViews()
+         }
+     }
     
-    func updateViews() {
-        guard let event = event else { return }
-        eventNameLabel.text = event.name
-        emojiLabel.text = event.emoji
-        eventDateLabel.text = dateFormatter.string(from: event.date)
-        eventDaysLeft.text = "\(event.daysLeft) days left"
-        
-    }
-    
-
+     
    
 }
