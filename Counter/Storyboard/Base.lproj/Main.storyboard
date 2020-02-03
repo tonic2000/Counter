@@ -88,7 +88,7 @@
         <!--Counter-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Counter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="Counter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,22 +104,77 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="OrU-uh-Sqh" kind="presentation" modalPresentationStyle="fullScreen" id="eqt-bA-DF9"/>
+                                    <action selector="addTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vq8-r8-gLa"/>
+                                    <segue destination="jVB-l2-JpW" kind="show" identifier="AddEventSegue" id="4MG-fa-dbH"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXr-cl-gLb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="816"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FDf-h8-n5c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EvenCell123" id="FDf-h8-n5c" customClass="EventCell" customModule="Counter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FDf-h8-n5c" id="bxG-Yv-Dte">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 😉" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UA2-4W-bKG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="70"/>
+                                                    <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="bch-xP-xjL"/>
+                                                        <constraint firstAttribute="height" constant="50" id="cDr-DT-9IW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="m69-Pm-yMJ">
+                                                    <rect key="frame" x="58" y="11.5" width="115" height="47"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Christmas Eve" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44R-IG-TlL">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="20.5"/>
+                                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020 Jun 13th " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWK-Ev-IRZ">
+                                                            <rect key="frame" x="0.0" y="26.5" width="115" height="20.5"/>
+                                                            <color key="backgroundColor" red="0.3882825077" green="0.67118060589999995" blue="0.54511564970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2200 Day Left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdo-65-6Xz">
+                                                    <rect key="frame" x="308.5" y="0.0" width="74.5" height="70"/>
+                                                    <color key="backgroundColor" red="0.72368377449999999" green="0.7208911777" blue="0.71315127609999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Hdo-65-6Xz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m69-Pm-yMJ" secondAttribute="trailing" constant="16" id="1Rr-57-b26"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hdo-65-6Xz" secondAttribute="trailing" id="Bgn-dk-KJr"/>
+                                                <constraint firstItem="m69-Pm-yMJ" firstAttribute="centerY" secondItem="bxG-Yv-Dte" secondAttribute="centerY" id="IVc-Nw-MNB"/>
+                                                <constraint firstItem="UA2-4W-bKG" firstAttribute="top" secondItem="bxG-Yv-Dte" secondAttribute="top" id="Pbf-pE-hrI"/>
+                                                <constraint firstItem="UA2-4W-bKG" firstAttribute="leading" secondItem="bxG-Yv-Dte" secondAttribute="leading" id="WyW-AV-SSt"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hdo-65-6Xz" secondAttribute="bottom" id="nMx-Pu-Yu5"/>
+                                                <constraint firstItem="Hdo-65-6Xz" firstAttribute="top" secondItem="bxG-Yv-Dte" secondAttribute="top" id="p2r-PZ-imV"/>
+                                                <constraint firstItem="m69-Pm-yMJ" firstAttribute="leading" secondItem="UA2-4W-bKG" secondAttribute="trailing" constant="8" id="vbp-zQ-9po"/>
+                                                <constraint firstAttribute="bottom" secondItem="UA2-4W-bKG" secondAttribute="bottom" id="xGB-l2-klY"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="WfC-Oh-7n1" kind="show" id="85Y-Xx-B2a"/>
+                                            <outlet property="emojiLabel" destination="UA2-4W-bKG" id="amz-Q5-TbL"/>
+                                            <outlet property="eventDateLabel" destination="QWK-Ev-IRZ" id="bZh-La-XoI"/>
+                                            <outlet property="eventDaysLeft" destination="Hdo-65-6Xz" id="L45-PD-kbf"/>
+                                            <outlet property="eventNameLabel" destination="44R-IG-TlL" id="Lo5-Od-Z2M"/>
+                                            <segue destination="WfC-Oh-7n1" kind="show" identifier="ClickCellSegue" id="85Y-Xx-B2a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -140,20 +195,28 @@
                     <navigationItem key="navigationItem" title="Counter" id="vX5-0f-1bt">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="gear" catalog="system" id="osd-EK-RDw">
                             <connections>
-                                <segue destination="R9y-98-fxw" kind="presentation" modalPresentationStyle="fullScreen" id="5GC-Pt-sUI"/>
+                                <action selector="settingTapped:" destination="BYZ-38-t0r" id="Cas-l4-1Wg"/>
+                                <segue destination="R9y-98-fxw" kind="presentation" identifier="ClickSettingSegue" modalPresentationStyle="fullScreen" id="5GC-Pt-sUI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Sort" id="LYs-zm-fYl"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="LYs-zm-fYl">
+                            <connections>
+                                <action selector="sortTapped:" destination="BYZ-38-t0r" id="Bry-KJ-XVe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="eventTableView" destination="yXr-cl-gLb" id="i97-N7-ixQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="137.94642857142856"/>
         </scene>
-        <!--New Event-->
+        <!--New Event TableVC-->
         <scene sceneID="F0a-yU-V3b">
             <objects>
-                <tableViewController id="jVB-l2-JpW" sceneMemberID="viewController">
+                <tableViewController id="jVB-l2-JpW" customClass="NewEventTableVC" customModule="Counter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="il4-7C-mcC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -172,6 +235,9 @@
                                                     <rect key="frame" x="20" y="0.0" width="374" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidChanged:" destination="jVB-l2-JpW" eventType="editingChanged" id="kZN-kv-8v0"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -280,6 +346,9 @@
                                                     <rect key="frame" x="0.0" y="34" width="414" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <connections>
+                                                        <action selector="pickerChange:" destination="jVB-l2-JpW" eventType="valueChanged" id="IXl-Ln-Rjq"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -304,6 +373,9 @@
                                                             <rect key="frame" x="333" y="30.5" width="51" height="31"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <connections>
+                                                                <action selector="switchTapped:" destination="jVB-l2-JpW" eventType="valueChanged" id="t7u-hF-gPf"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -325,15 +397,29 @@
                             <outlet property="delegate" destination="jVB-l2-JpW" id="ABt-fj-8O5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Event" id="qcf-Gc-CGd">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="Akr-Hy-BRF"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="eEX-ya-E4b"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="yur-Rd-z4e">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="jQG-es-pLg">
+                            <connections>
+                                <action selector="saveTapped:" destination="jVB-l2-JpW" id="5jA-lq-KHZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1200"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="8bg-9n-5df" id="lAJ-Zl-6y8"/>
+                        <outlet property="datePicker" destination="6LA-gF-Zfv" id="DFn-Yn-D0o"/>
+                        <outlet property="eventNameTextField" destination="zrU-mZ-yur" id="RRT-pz-F9v"/>
+                        <outlet property="iconTextView" destination="rH2-2d-ght" id="MGI-d1-1cJ"/>
+                        <outlet property="letterTextView" destination="aIJ-ll-y76" id="kiT-KJ-Hky"/>
+                        <outlet property="saveButton" destination="jQG-es-pLg" id="Pg5-4S-g2G"/>
+                        <outlet property="timeSwitch" destination="c8V-KA-Z4A" id="QM5-df-gHm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYm-xG-dfI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="990"/>
+            <point key="canvasLocation" x="1101" y="1006"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mhI-rX-glS">
@@ -382,24 +468,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hgb-yz-mkc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="114" y="926"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2L3-rG-aia">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OrU-uh-Sqh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dOx-1i-CAU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="jVB-l2-JpW" kind="relationship" relationship="rootViewController" id="HzI-uG-TiP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="stj-zG-Dl1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1042" y="926"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qo8-Ce-24n">
