@@ -14,15 +14,10 @@ protocol NewEventTableViewControllerDelegate : AnyObject {
 }
 private var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "E, d MMM yyyy HH:mm:ss "
+    formatter.dateFormat = "E, d MMM yyyy  "
     formatter.timeZone = TimeZone(secondsFromGMT: 0)
     return formatter
 }()
-
-
-
-
-
 
 class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate {
 
@@ -56,8 +51,12 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     
     
     @IBAction func switchTapped(_ sender: UISwitch) {
+        
+        dateFormatter.dateFormat = sender.isOn ?  "E, d MMM yyyy HH:mm:ss" : "E, d MMM yyyy"
+        
         if sender.isOn {
             datePicker.datePickerMode = .time
+           
         } else {
             datePicker.datePickerMode = .date
         }
@@ -68,27 +67,21 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     @IBAction func pickerChange(_ sender: UIDatePicker) {
         dateLabel.text = dateFormatter.string(from: sender.date)
     }
-    
-    
-    
-    
-    
-    
+
     @IBAction func saveTapped(_ sender: UIBarButtonItem) {
         guard let name = eventNameTextField.text else { return }
               guard let emoji = iconTextView.text else { return }
               guard let content = letterTextView.text else { return }
               let pickedDate = datePicker.date
+        
               let daysLeft = Date.differ(lhs: pickedDate, rhs: Date())
-              
-              delegate?.didReceivedNewEvent(name: name, emoji: emoji, content: content, date: pickedDate, dayleft: daysLeft)
+               
+        delegate?.didReceivedNewEvent(name: name, emoji: emoji, content: content, date: pickedDate, dayleft: (daysLeft / 86400) )
               
              navigationController?.popViewController(animated: true)
               
     }
-    
-    
-    
+
 }
 extension Date {
     static func differ(lhs:Date,rhs:Date) -> TimeInterval {

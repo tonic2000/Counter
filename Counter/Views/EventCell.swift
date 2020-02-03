@@ -16,16 +16,13 @@ class EventCell: UITableViewCell {
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
         eventDateLabel.text = dateFormatter.string(from: event.date)
-        eventDaysLeft.text = "\(event.daysLeft) days left"
+        eventDaysLeft.text = "\(Int(event.daysLeft)) days left"
         
     }
-    
    
-    
-    
     private var dateFormatter: DateFormatter = {
            let formatter = DateFormatter()
-           formatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
+           formatter.dateFormat = "E, d MMM yyyy"
            formatter.timeZone = TimeZone(secondsFromGMT: 0)
            return formatter
        }()

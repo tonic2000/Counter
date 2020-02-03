@@ -34,4 +34,9 @@ class Event : Codable , Comparable {
         self.daysLeft = daysLeft
     }
     
+    
+    
+    
+    
+    
 }
