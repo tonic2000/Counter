@@ -10,7 +10,7 @@ import Foundation
 
 class Helper {
     
-    static let eventCellId = "EvenCell123"
+    static let eventCellId = "EventCell123"
     static let addButtonSegue = "AddEventSegue"
     static let clickCellSegue = "ClickCellSegue"
     static let clickSettingSegue = "ClickSettingSegue"
