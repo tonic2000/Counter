@@ -193,7 +193,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text=" 🎃" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text=" 🎃" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght">
                                                     <rect key="frame" x="157" y="19.5" width="100" height="100"/>
                                                     <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -343,6 +343,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7zL-3I-TAX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -443,7 +444,7 @@
                                 <rect key="frame" x="0.0" y="847" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <barButtonItem title="Item" image="paintbrush" catalog="system" id="Coy-5o-ejl"/>
+                                    <barButtonItem title="Item" image="pencil.tip.crop.circle" catalog="system" id="Coy-5o-ejl"/>
                                     <barButtonItem width="365" style="plain" systemItem="fixedSpace" id="XmN-46-dHM"/>
                                     <barButtonItem title="Item" image="square.and.arrow.up" catalog="system" id="uhM-Xf-VeM"/>
                                 </items>
@@ -551,7 +552,7 @@
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="64" height="58"/>
-        <image name="paintbrush" catalog="system" width="64" height="64"/>
+        <image name="pencil.tip.crop.circle" catalog="system" width="64" height="60"/>
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
 </document>
