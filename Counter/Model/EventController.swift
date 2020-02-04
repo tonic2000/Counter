@@ -13,9 +13,9 @@ class EventController  {
     
     var events = [Event]()
     
-    init() {
-        loadFromPersistentStore()
-    }
+//    init() {
+//        loadFromPersistentStore()
+//    }
     
     func createEvent( name: String, emoji: String, date: Date, content: String?, daysLeft: Double)  {
         let event = Event(name: name, emoji: emoji, letterContent: content, date: date, daysLeft: daysLeft)
