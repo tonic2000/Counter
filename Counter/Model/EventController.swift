@@ -20,7 +20,7 @@ class EventController  {
     func createEvent( name: String, emoji: String, date: Date, content: String?, daysLeft: Double)  {
         let event = Event(name: name, emoji: emoji, letterContent: content, date: date, daysLeft: daysLeft)
         events.append(event)
-     saveToPersistStore()
+        saveToPersistStore()
     }
     
     
@@ -55,6 +55,10 @@ class EventController  {
              }
          }
     
-    
+    func deleteEvent(event: Event) {
+        guard let event = events.firstIndex(of: event) else { return }
+        events.remove(at: event)
+        saveToPersistStore()
+    }
     
 }
