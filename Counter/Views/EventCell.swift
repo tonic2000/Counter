@@ -26,7 +26,7 @@ class EventCell: UITableViewCell {
        
         eventDateLabel.text = dateFormatter.string(from: event.date)
         eventDaysLeft.text = "\(Int(event.daysLeft)) days left"
-        eventDaysLeft.backgroundColor = UIColor(displayP3Red: 72/255, green: 162/255, blue: 145/255, alpha: 1)
+    eventDaysLeft.backgroundColor = UIColor.black
         
     }
    

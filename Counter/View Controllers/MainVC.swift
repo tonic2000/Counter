@@ -136,6 +136,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         cell.event = event
        
        
+       
         return cell
         
     }

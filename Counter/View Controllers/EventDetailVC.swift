@@ -8,87 +8,91 @@
 
 import UIKit
 
-class EventDetailVC: UIViewController {
+class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
+    
+    @IBOutlet weak var nameEventLabel: UILabel!
+    
+    @IBOutlet weak var shareButtonBackgroundView: UIView!
+    @IBOutlet weak var emojiBackgroundView: UIView!
+    @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var date1Label: UILabel!
+    @IBOutlet weak var date2Label: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var percentageLabel: UILabel!
     
     
-   
     
-    @IBOutlet weak var exampleView: UIView!
     
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss  "
+        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter
     }()
     
+    
+    
+    
+    
     func updateView() {
+         guard let event = event else { return }
         
-        guard let event = event else { return }
-        emojiLabel.text = event.emoji
-        eventNameLabel.text = event.name
+        emojiBackgroundView.layer.cornerRadius = emojiBackgroundView.frame.size.width / 2
+        emojiBackgroundView.layer.borderColor = UIColor.gray.cgColor
+        emojiBackgroundView.clipsToBounds = true
+        emojiBackgroundView.layer.borderWidth = 5.0
+        
+        backButtonBackgroundView.layer.cornerRadius = backButtonBackgroundView.frame.size.width / 2
+        shareButtonBackgroundView.layer.cornerRadius = shareButtonBackgroundView.frame.size.width / 2
+       
+        nameEventLabel.text = event.name
         date1Label.text = dateFormatter.string(from: event.date)
-          
+        date2Label.text = "Countdown:\(event.daysLeft)"
+        emojiLabel.text = event.emoji
+        emojiLabel.textAlignment = .center
+    
     }
 
     var event: Event?
     
-    func setUpToolBar() {
+             
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        
+        tap.delegate = self
+        
+        emojiBackgroundView.addGestureRecognizer(tap)
+        updateView()
+        progressView.transform = progressView.transform.scaledBy(x: 1, y: 20)
         
     }
-           override func viewWillAppear(_ animated: Bool) {
-                 super.viewWillAppear(animated)
-                startOtpTimer()
-             }
-             
-             override func viewDidLoad() {
-                 super.viewDidLoad()
-                exampleView.layer.cornerRadius = view.frame.size.width / 2
-                updateView()
-               progressView.transform = progressView.transform.scaledBy(x: 1, y: 20)
-              
-             }
-             
-        
     
-     
-//    var timer = Timer()
+     @objc func handleTap(sender: UITapGestureRecognizer) {
+          
+            view.alpha =  0.5
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myAlert = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        myAlert.delegate = self
+            
+        myAlert.modalPresentationStyle = .overCurrentContext
+        myAlert.modalTransitionStyle = .crossDissolve
+            self.present(myAlert, animated: true, completion: nil)
+    }
     
     
     
-    var timer: Timer?
-        var totalTime = 0
-
-        private func startOtpTimer() {
-            self.totalTime = Int(event!.daysLeft)
-               self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-           }
-
-       @objc func updateTimer() {
-               print(self.totalTime)
-        self.date2Label.text = dateFormatter.string(from: Date(timeInterval: event!.daysLeft, since: Date()))
-               if totalTime != 0 {
-                   totalTime -= 1  // decrease counter timer
-               } else {
-                   if let timer = self.timer {
-                       timer.invalidate()
-                       self.timer = nil
-                   }
-               }
-           }
-     
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
+    @IBOutlet weak var backButtonBackgroundView: UIView!
     
-    @IBOutlet weak var emojiView: UIView!
-    @IBOutlet weak var emojiLabel: UILabel!
-    @IBOutlet weak var eventNameLabel: UILabel!
-    
-    @IBOutlet weak var percentageLabel: UILabel!
-    @IBOutlet weak var date1Label: UILabel!
-    @IBOutlet weak var date2Label: UILabel!
-    
-    @IBOutlet weak var progressView: UIProgressView!
-  
+}
+extension EventDetailVC: AlertViewControllerDelegate {
+    func didTapOnScreen() {
+        view.alpha = 1.0
+    }
     
     
 }
