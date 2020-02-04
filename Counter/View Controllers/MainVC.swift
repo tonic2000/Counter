@@ -137,8 +137,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
          let event = eventController.events[indexPath.row] //
         cell.event = event
        
-       
-       
         return cell
         
     }
@@ -146,8 +144,9 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
   //Swipe to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            eventController.events.remove(at: indexPath.row)
+             eventController.deleteEvent(event: eventController.events[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .automatic)
+           
             sortButton.isEnabled = eventController.events.count > 1 ? true : false
         }
     }
@@ -168,21 +167,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         eventController.events.insert(movedObject, at: destinationIndexPath.row)
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let index = tableView.indexPathForSelectedRow else { return }
-//        let ctrl = storyboard?.instantiateViewController(withIdentifier: "Detail") as! EventDetailVC
-//        ctrl.event = eventController.events[index.row]
-//    }
-//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let cell = tableView.cellForRowAtIndexPath(indexPath)
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//
-//        performSegueWithIdentifier("mySegue", sender: cell)
-//    }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath)
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        performSegue(withIdentifier: Helper.clickCellSegue, sender: cell)
-//    }
+
     
 }

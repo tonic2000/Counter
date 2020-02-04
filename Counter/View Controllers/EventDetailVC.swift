@@ -10,18 +10,25 @@ import UIKit
 
 class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
+    var countdownTimer = Timer()
+
     @IBOutlet weak var nameEventLabel: UILabel!
-    
     @IBOutlet weak var shareButtonBackgroundView: UIView!
     @IBOutlet weak var emojiBackgroundView: UIView!
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var date1Label: UILabel!
-    @IBOutlet weak var date2Label: UILabel!
+   
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var percentageLabel: UILabel!
+   
     
     
-    
+    @IBOutlet weak var yearsNumLabel: UILabel!
+    @IBOutlet weak var dayNumLabel: UILabel!
+    @IBOutlet weak var monthNumLabel: UILabel!
+    @IBOutlet weak var hourNumLabel: UILabel!
+    @IBOutlet weak var minNumLabel: UILabel!
+    @IBOutlet weak var secNumLabel: UILabel!
     
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -30,7 +37,31 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         return formatter
     }()
     
+   
+   
+    func startTimer() {
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+        
+    }
+
+    @objc func updateTime() {
+
+        let currentDate = Date()
+         let calendar = Calendar.current
+        
+         let diffDateComponents = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currentDate,to: event!.date)
+        
+       
+        secNumLabel.text = "\(diffDateComponents.second ?? 0)"
+        minNumLabel.text = "\(diffDateComponents.minute ?? 0)"
+        hourNumLabel.text  = "\(diffDateComponents.hour ?? 0)"
+        dayNumLabel.text = "\(diffDateComponents.day ?? 0)"
+        monthNumLabel.text = "\(diffDateComponents.month ?? 0)"
+        yearsNumLabel.text = "\(diffDateComponents.year  ?? 0)"
+        
     
+    }
     
     
     
@@ -47,7 +78,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
        
         nameEventLabel.text = event.name
         date1Label.text = dateFormatter.string(from: event.date)
-        date2Label.text = "Countdown:\(event.daysLeft)"
+        
         emojiLabel.text = event.emoji
         emojiLabel.textAlignment = .center
     
@@ -65,8 +96,21 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         emojiBackgroundView.addGestureRecognizer(tap)
         updateView()
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 20)
-        
+        startTimer()
     }
+    
+    
+    
+    @IBAction func shareTapped(_ sender: UIButton) {
+        let bounds = UIScreen.main.bounds
+              UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+              self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+              let img = UIGraphicsGetImageFromCurrentImageContext()
+              UIGraphicsEndImageContext()
+              let activityViewController = UIActivityViewController(activityItems: [img ?? "No image"], applicationActivities: nil)
+              self.present(activityViewController, animated: true, completion: nil)
+    }
+    
     
      @objc func handleTap(sender: UITapGestureRecognizer) {
           
@@ -89,6 +133,14 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var backButtonBackgroundView: UIView!
     
 }
+
+
+
+
+
+
+
+
 extension EventDetailVC: AlertViewControllerDelegate {
     func didTapOnScreen() {
         view.alpha = 1.0
