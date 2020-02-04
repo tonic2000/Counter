@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol EventDetailVCDelegate : AnyObject {
+    func didEndTimer()
+}
+
+
 class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
-    var countdownTimer = Timer()
+    var countdownTimer : Timer?
 
     @IBOutlet weak var nameEventLabel: UILabel!
     @IBOutlet weak var shareButtonBackgroundView: UIView!
@@ -37,7 +42,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         return formatter
     }()
     
-   
+    weak var delegate2: EventDetailVCDelegate?
    
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -59,7 +64,12 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         dayNumLabel.text = "\(diffDateComponents.day ?? 0)"
         monthNumLabel.text = "\(diffDateComponents.month ?? 0)"
         yearsNumLabel.text = "\(diffDateComponents.year  ?? 0)"
-        
+        if diffDateComponents.second == 0  && diffDateComponents.minute == 0 && diffDateComponents.hour == 0 && diffDateComponents.day == 0 && diffDateComponents.month == 0 && diffDateComponents.year == 0 {
+             countdownTimer?.invalidate()
+            countdownTimer = nil
+           dismiss(animated: true, completion: nil)
+            delegate2?.didEndTimer()
+        }
     
     }
     
@@ -133,12 +143,6 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var backButtonBackgroundView: UIView!
     
 }
-
-
-
-
-
-
 
 
 extension EventDetailVC: AlertViewControllerDelegate {
