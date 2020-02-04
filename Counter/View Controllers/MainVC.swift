@@ -28,10 +28,12 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
     var eventController = EventController()
     var event: Event?
+       
     
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
          eventTableView.reloadData()
+         sortButton.isEnabled = eventController.events.count > 1 ? true : false
      }
     
     override func viewDidLoad() {
@@ -106,7 +108,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     
    private func moveCell(action: UIAlertAction) {
-    addButton.isEnabled = false
+          addButton.isEnabled = false
         self.eventTableView.isEditing.toggle()
         switch eventTableView.isEditing {
         case true:
@@ -146,6 +148,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             eventController.events.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            sortButton.isEnabled = eventController.events.count > 1 ? true : false
         }
     }
     
