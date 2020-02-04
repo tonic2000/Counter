@@ -8,6 +8,9 @@
 
 import UIKit
 import Foundation
+
+
+
 extension UIColor {
     static var random: UIColor {
         return UIColor(red: .random(in: 0...1),
@@ -24,8 +27,8 @@ class EventCell: UITableViewCell {
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
        
-        eventDateLabel.text = dateFormatter.string(from: event.date)
-        eventDaysLeft.text = "\(Int(event.daysLeft)) days left"
+    eventDateLabel.text = dateFormatter.string(from: event.date)
+    eventDaysLeft.text = event.daysLeft > 0.0 ? "\(Int(event.daysLeft)) days left" : "☑️"
     eventDaysLeft.backgroundColor = UIColor(displayP3Red: 38/255, green: 50/255, blue: 72/255, alpha: 1.0)
         
     }
