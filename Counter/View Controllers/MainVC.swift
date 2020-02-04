@@ -58,6 +58,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             let sender = (sender as? EventCell)!
             guard let indexPath = eventTableView.indexPath(for: sender) else { return }
             let event = eventController.events[indexPath.row]
+            destVC.delegate2 = self
             destVC.event = event
       
         default:
@@ -91,11 +92,11 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         let ac = UIAlertController(title: "SORT EVENTS", message: nil, preferredStyle: .actionSheet)
         
         ac.addAction(UIAlertAction(title: "Sort alphabetically", style: .default, handler: { (action) in
-            self.eventController.events.sort(by: > )
+            self.eventController.sortAlphabetically()
             self.eventTableView.reloadData()
         }))
         
-        ac.addAction(UIAlertAction(title: "Sort from Soonest to Furthest", style: .default, handler: nil))
+        ac.addAction(UIAlertAction(title: "Sort from Soonest to Furthest", style: .default, handler: sortTime(action:) ))
         ac.addAction(UIAlertAction(title: "Sort manually", style: .default, handler: moveCell(action:)))
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
@@ -104,7 +105,16 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     
     
+    func sortTime(action: UIAlertAction)  {
+        
+        eventController.sortTime()
+        self.eventTableView.reloadData()
+          
+    }
+    
     @IBAction func settingTapped(_ sender: UIBarButtonItem) {
+        
+        
     }
     
    private func moveCell(action: UIAlertAction) {
@@ -168,5 +178,18 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
 
+    
+}
+
+extension MainVC: EventDetailVCDelegate {
+    func didEndTimer() {
+        eventController.events.map {
+            $0.daysLeft > 0
+           
+        }
+         eventTableView.reloadData()
+        
+    }
+    
     
 }

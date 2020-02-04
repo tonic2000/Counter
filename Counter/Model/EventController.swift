@@ -61,4 +61,16 @@ class EventController  {
         saveToPersistStore()
     }
     
+    
+    func sortTime() {
+        events.sort { $0.daysLeft < $1.daysLeft }
+        saveToPersistStore()
+    }
+    
+    
+    func sortAlphabetically() {
+       events.sort(by: < )
+        saveToPersistStore()
+    }
+    
 }
