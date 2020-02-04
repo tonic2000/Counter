@@ -50,11 +50,18 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             destVC.delegate = self
             destVC.eventController = eventController
             
+        case Helper.clickCellSegue:
+            
+            guard let destVC = segue.destination as? EventDetailVC else { return }
+            let sender = (sender as? EventCell)!
+            guard let indexPath = eventTableView.indexPath(for: sender) else { return }
+            let event = eventController.events[indexPath.row]
+            destVC.event = event
       
         default:
             break
+       
         }
- 
     }
 
 
@@ -157,7 +164,21 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         eventController.events.insert(movedObject, at: destinationIndexPath.row)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard let index = tableView.indexPathForSelectedRow else { return }
+//        let ctrl = storyboard?.instantiateViewController(withIdentifier: "Detail") as! EventDetailVC
+//        ctrl.event = eventController.events[index.row]
+//    }
+//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//
+//        performSegueWithIdentifier("mySegue", sender: cell)
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        performSegue(withIdentifier: Helper.clickCellSegue, sender: cell)
+//    }
+    
 }
