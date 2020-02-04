@@ -26,6 +26,13 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var percentageLabel: UILabel!
    
+    @IBOutlet weak var yearsLabel: UILabel!
+    @IBOutlet weak var monthsLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var hoursLabel: UILabel!
+    @IBOutlet weak var minutesLabel: UILabel!
+    @IBOutlet weak var secondsLabel: UILabel!
+    
     
     
     @IBOutlet weak var yearsNumLabel: UILabel!
@@ -57,13 +64,37 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         
          let diffDateComponents = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currentDate,to: event!.date)
         
-       
-        secNumLabel.text = "\(diffDateComponents.second ?? 0)"
-        minNumLabel.text = "\(diffDateComponents.minute ?? 0)"
-        hourNumLabel.text  = "\(diffDateComponents.hour ?? 0)"
-        dayNumLabel.text = "\(diffDateComponents.day ?? 0)"
-        monthNumLabel.text = "\(diffDateComponents.month ?? 0)"
-        yearsNumLabel.text = "\(diffDateComponents.year  ?? 0)"
+        guard let year = diffDateComponents.year,
+            let month = diffDateComponents.month,
+            let day = diffDateComponents.day,
+            let hour = diffDateComponents.hour ,
+            let minute = diffDateComponents.minute,
+            let second = diffDateComponents.second
+            
+            
+            else { return }
+        
+        
+        
+        secondsLabel.text  = second != 1 ? "seconds" : "second"
+        minutesLabel.text = minute != 1 ? "minutes" : "minute"
+        hoursLabel.text = hour != 1 ? "hours" : "hour"
+        daysLabel.text = day != 1 ? "days" : "day"
+        monthsLabel.text = month != 1 ? "months" : "month"
+        yearsLabel.text = year != 1 ? "years" : "year"
+        
+        
+        
+    
+        secNumLabel.text = second > 0 ? "\(second)" : "0"
+        minNumLabel.text =  minute > 0 ?  "\(minute)" : "0"
+        hourNumLabel.text = hour > 0 ?  "\(hour)" : "0"
+        dayNumLabel.text =  day > 0 ?  "\(day)" : "0"
+        monthNumLabel.text = month > 0 ? "\(month)" : "0"
+        yearsNumLabel.text =  year > 0 ?   "\(year)" : "0"
+        
+        
+      
         if diffDateComponents.second == 0  && diffDateComponents.minute == 0 && diffDateComponents.hour == 0 && diffDateComponents.day == 0 && diffDateComponents.month == 0 && diffDateComponents.year == 0 {
              countdownTimer?.invalidate()
             countdownTimer = nil
@@ -72,9 +103,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         }
     
     }
-    
-    
-    
+ 
     func updateView() {
          guard let event = event else { return }
         

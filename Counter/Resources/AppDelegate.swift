@@ -14,9 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UNUserNotificationCenter.current()
+                   .requestAuthorization(options: [.alert,.badge,.sound]) { (granted,error) in
+                       if granted {
+                           print("Hello world.")
+                           
+                       }
+               }
+        
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!
                ]
+        
+        
+        
+        
         return true
     }
 

@@ -27,6 +27,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
     
     var eventController = EventController()
+    
     var event: Event?
        
     
@@ -184,7 +185,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 extension MainVC: EventDetailVCDelegate {
     func didEndTimer() {
         eventController.events.map {
-            $0.daysLeft > 0
+            $0.daysLeft != 0
            
         }
          eventTableView.reloadData()
