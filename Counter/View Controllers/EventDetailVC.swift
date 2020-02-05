@@ -15,8 +15,7 @@ protocol EventDetailVCDelegate : AnyObject {
 
 class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
-    var countdownTimer : Timer?
-
+   
     @IBOutlet weak var nameEventLabel: UILabel!
     @IBOutlet weak var shareButtonBackgroundView: UIView!
     @IBOutlet weak var emojiBackgroundView: UIView!
@@ -32,7 +31,8 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
-    
+  
+      
     
     
     @IBOutlet weak var yearsNumLabel: UILabel!
@@ -49,12 +49,42 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         return formatter
     }()
     
+    var event: Event?
     weak var delegate2: EventDetailVCDelegate?
+        var countdownTimer : Timer?
+
+    
+    //MARK:-  App Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.startTimer()
+          self.updateTime()
+    }
+
+      override func viewDidLoad() {
+          super.viewDidLoad()
+       
+        self.startTimer()
+      
+        self.updateView()
+        
+         let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+          tap.delegate = self
+          
+          emojiBackgroundView.addGestureRecognizer(tap)
+    
+      }
+  
    
-    func startTimer() {
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        
-        
+   private func startTimer() {
+    
+       countdownTimer = Timer.scheduledTimer(timeInterval: 1,
+                                             target: self,
+                                             selector: #selector(updateTime),
+                                             userInfo: nil,
+                                             repeats: true)
+   
     }
 
     @objc func updateTime() {
@@ -75,36 +105,39 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
             else { return }
         
         
-        
-        secondsLabel.text  = second != 1 ? "seconds" : "second"
-        minutesLabel.text = minute != 1 ? "minutes" : "minute"
-        hoursLabel.text = hour != 1 ? "hours" : "hour"
-        daysLabel.text = day != 1 ? "days" : "day"
-        monthsLabel.text = month != 1 ? "months" : "month"
-        yearsLabel.text = year != 1 ? "years" : "year"
-        
-        
-        
-    
-        secNumLabel.text = second > 0 ? "\(second)" : "0"
-        minNumLabel.text =  minute > 0 ?  "\(minute)" : "0"
-        hourNumLabel.text = hour > 0 ?  "\(hour)" : "0"
-        dayNumLabel.text =  day > 0 ?  "\(day)" : "0"
-        monthNumLabel.text = month > 0 ? "\(month)" : "0"
-        yearsNumLabel.text =  year > 0 ?   "\(year)" : "0"
-        
-        
-      
-        if diffDateComponents.second == 0  && diffDateComponents.minute == 0 && diffDateComponents.hour == 0 && diffDateComponents.day == 0 && diffDateComponents.month == 0 && diffDateComponents.year == 0 {
-             countdownTimer?.invalidate()
-            countdownTimer = nil
-           dismiss(animated: true, completion: nil)
-            delegate2?.didEndTimer()
+        DispatchQueue.main.async {
+            self.secondsLabel.text  = second != 1 ? "seconds" : "second"
+            self.minutesLabel.text = minute != 1 ? "minutes" : "minute"
+            self.hoursLabel.text = hour != 1 ? "hours" : "hour"
+            self.daysLabel.text = day != 1 ? "days" : "day"
+            self.monthsLabel.text = month != 1 ? "months" : "month"
+            self.yearsLabel.text = year != 1 ? "years" : "year"
+                  
+                  
+                  
+              
+            self.secNumLabel.text = second > 0 ? "\(second)" : "0"
+            self.minNumLabel.text =  minute > 0 ?  "\(minute)" : "0"
+            self.hourNumLabel.text = hour > 0 ?  "\(hour)" : "0"
+            self.dayNumLabel.text =  day > 0 ?  "\(day)" : "0"
+            self.monthNumLabel.text = month > 0 ? "\(month)" : "0"
+            self.yearsNumLabel.text =  year > 0 ?   "\(year)" : "0"
+                  
+                  
+                
+                  if diffDateComponents.second == 0  && diffDateComponents.minute == 0 && diffDateComponents.hour == 0 && diffDateComponents.day == 0 && diffDateComponents.month == 0 && diffDateComponents.year == 0 {
+                    self.countdownTimer?.invalidate()
+                    self.countdownTimer = nil
+                    self.dismiss(animated: true, completion: nil)
+                    self.delegate2?.didEndTimer()
+                  }
         }
+      
     
     }
+   
  
-    func updateView() {
+   private func updateView() {
          guard let event = event else { return }
         
         emojiBackgroundView.layer.cornerRadius = emojiBackgroundView.frame.size.width / 2
@@ -123,23 +156,6 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
     }
 
-    var event: Event?
-    
-             
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
-        tap.delegate = self
-        
-        emojiBackgroundView.addGestureRecognizer(tap)
-        updateView()
-        progressView.transform = progressView.transform.scaledBy(x: 1, y: 20)
-        startTimer()
-    }
-    
-    
-    
     @IBAction func shareTapped(_ sender: UIButton) {
         let bounds = UIScreen.main.bounds
               UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
@@ -153,14 +169,14 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
      @objc func handleTap(sender: UITapGestureRecognizer) {
           
-            view.alpha =  0.5
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let myAlert = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        view.alpha =  0.5
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myAlert = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
         myAlert.delegate = self
-            
+        
         myAlert.modalPresentationStyle = .overCurrentContext
         myAlert.modalTransitionStyle = .crossDissolve
-            self.present(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
     
     

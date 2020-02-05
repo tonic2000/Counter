@@ -30,12 +30,14 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
     var event: Event?
        
+   //MARK: - App Life Cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         eventTableView.reloadData()
-         sortButton.isEnabled = eventController.events.count > 1 ? true : false
-     }
+   override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+       eventTableView.reloadData()
+       sortButton.isEnabled = eventController.events.count > 1 ? true : false
+      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+   }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,8 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
        
     }
- 
+    
+ // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         switch segue.identifier  {
@@ -52,11 +55,11 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
               guard  let destVC = segue.destination as? NewEventTableVC else { return }
             destVC.delegate = self
             destVC.eventController = eventController
-            
+           
         case Helper.clickCellSegue:
             
             guard let destVC = segue.destination as? EventDetailVC else { return }
-            let sender = (sender as? EventCell)!
+            guard  let sender = (sender as? EventCell) else { return }
             guard let indexPath = eventTableView.indexPath(for: sender) else { return }
             let event = eventController.events[indexPath.row]
             destVC.delegate2 = self
@@ -132,6 +135,8 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     
 }
+// MARK: - TableView DataSource and Delegate
+
 extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return eventController.events.count
@@ -177,17 +182,18 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         eventController.events.remove(at: sourceIndexPath.row)
         eventController.events.insert(movedObject, at: destinationIndexPath.row)
     }
-    
+  
 
     
 }
 
 extension MainVC: EventDetailVCDelegate {
     func didEndTimer() {
-        eventController.events.map {
+     let new = eventController.events.filter {
             $0.daysLeft != 0
            
-        }
+            }
+         eventController.events = new 
          eventTableView.reloadData()
         
     }
