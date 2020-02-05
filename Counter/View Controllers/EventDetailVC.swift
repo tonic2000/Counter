@@ -42,44 +42,39 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var minNumLabel: UILabel!
     @IBOutlet weak var secNumLabel: UILabel!
     
-    private var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        return formatter
-    }()
+    
+    
+    private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy HH:mm:ss")
     
     var event: Event?
     weak var delegate2: EventDetailVCDelegate?
-        var countdownTimer : Timer?
+    var countdownTimer : Timer?
 
     
     //MARK:-  App Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.startTimer()
           self.updateTime()
     }
 
-      override func viewDidLoad() {
-          super.viewDidLoad()
-       
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.startTimer()
-      
         self.updateView()
         
-         let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-          tap.delegate = self
-          
-          emojiBackgroundView.addGestureRecognizer(tap)
+        let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        tap.delegate = self
+        
+        emojiBackgroundView.addGestureRecognizer(tap)
+        
+    }
     
-      }
-  
    
    private func startTimer() {
     
-       countdownTimer = Timer.scheduledTimer(timeInterval: 1,
+    countdownTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
                                              selector: #selector(updateTime),
                                              userInfo: nil,
@@ -91,8 +86,8 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
 
         let currentDate = Date()
          let calendar = Calendar.current
-        
-         let diffDateComponents = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currentDate,to: event!.date)
+        guard let eventDate = event?.date else { return }
+         let diffDateComponents = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currentDate,to: eventDate)
         
         guard let year = diffDateComponents.year,
             let month = diffDateComponents.month,
@@ -112,25 +107,31 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
             self.daysLabel.text = day != 1 ? "days" : "day"
             self.monthsLabel.text = month != 1 ? "months" : "month"
             self.yearsLabel.text = year != 1 ? "years" : "year"
-                  
-                  
-                  
-              
+            
+            
+            
+            
             self.secNumLabel.text = second > 0 ? "\(second)" : "0"
             self.minNumLabel.text =  minute > 0 ?  "\(minute)" : "0"
             self.hourNumLabel.text = hour > 0 ?  "\(hour)" : "0"
             self.dayNumLabel.text =  day > 0 ?  "\(day)" : "0"
             self.monthNumLabel.text = month > 0 ? "\(month)" : "0"
             self.yearsNumLabel.text =  year > 0 ?   "\(year)" : "0"
-                  
-                  
-                
-                  if diffDateComponents.second == 0  && diffDateComponents.minute == 0 && diffDateComponents.hour == 0 && diffDateComponents.day == 0 && diffDateComponents.month == 0 && diffDateComponents.year == 0 {
-                    self.countdownTimer?.invalidate()
-                    self.countdownTimer = nil
-                    self.dismiss(animated: true, completion: nil)
-                    self.delegate2?.didEndTimer()
-                  }
+            
+            
+            
+            if diffDateComponents.second == 0  &&
+                diffDateComponents.minute == 0 &&
+                diffDateComponents.hour == 0 &&
+                diffDateComponents.day == 0 &&
+                diffDateComponents.month == 0 &&
+                diffDateComponents.year == 0
+            {
+                self.countdownTimer?.invalidate()
+                self.countdownTimer = nil
+                self.dismiss(animated: true, completion: nil)
+                self.delegate2?.didEndTimer()
+            }
         }
       
     
@@ -156,8 +157,10 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
     }
 
+    // MARK: - UIActivityViewController
+    
     @IBAction func shareTapped(_ sender: UIButton) {
-        let bounds = UIScreen.main.bounds
+             let bounds = UIScreen.main.bounds
               UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
               self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
               let img = UIGraphicsGetImageFromCurrentImageContext()
@@ -190,10 +193,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
 }
 
 
-extension EventDetailVC: AlertViewControllerDelegate {
-    func didTapOnScreen() {
-        view.alpha = 1.0
-    }
+
     
     
-}
+

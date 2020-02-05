@@ -9,27 +9,17 @@
 import UIKit
 import Foundation
 
-
-
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(red: .random(in: 0...1),
-                       green: .random(in: 0...1),
-                       blue: .random(in: 0...1),
-                       alpha: 1.0)
-    }
-}
 class EventCell: UITableViewCell {
    
     
-  private  func updateViews() {
+    private  func updateViews() {
         guard let event = event else { return }
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
-       
-    eventDateLabel.text = dateFormatter.string(from: event.date)
-    eventDaysLeft.text = event.daysLeft > 0.0 ? "\(Int(event.daysLeft)) days left" : "☑️"
-    eventDaysLeft.backgroundColor = UIColor(displayP3Red: 38/255, green: 50/255, blue: 72/255, alpha: 1.0)
+        
+        eventDateLabel.text = dateFormatter.string(from: event.date)
+        eventDaysLeft.text = event.daysLeft > 0.0 ? "\(Int(event.daysLeft)) days left" : "☑️"
+        eventDaysLeft.backgroundColor = UIColor(displayP3Red: 38/255, green: 50/255, blue: 72/255, alpha: 1.0)
         
     }
    

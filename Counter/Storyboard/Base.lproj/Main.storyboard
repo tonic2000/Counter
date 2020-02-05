@@ -433,7 +433,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBO-Tl-TWh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBO-Tl-TWh" userLabel="Top Detail View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
                                 <subviews>
                                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RfV-7j-bvy">
@@ -474,7 +474,7 @@
                                     <constraint firstItem="4P4-Ux-Luu" firstAttribute="leading" secondItem="rBO-Tl-TWh" secondAttribute="leading" constant="8" id="oc1-ei-gsp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQl-cS-fVo">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQl-cS-fVo" userLabel="Bottom Detail View">
                                 <rect key="frame" x="0.0" y="431" width="414" height="431"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AGX-Hl-8yK">
@@ -551,7 +551,7 @@
                                             <constraint firstItem="Ovv-Rv-wma" firstAttribute="centerY" secondItem="ZpS-vu-Mt0" secondAttribute="centerY" id="xdh-tj-Llt"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKM-wq-N8F">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKM-wq-N8F" userLabel="Time View">
                                         <rect key="frame" x="12" y="84" width="390" height="84.333333333333314"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wEX-l7-otG">
