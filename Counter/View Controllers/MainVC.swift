@@ -5,8 +5,10 @@
 //  Created by Nick Nguyen on 1/31/20.
 //  Copyright © 2020 Nick Nguyen. All rights reserved.
 //
+// Nick version
 
 import UIKit
+import MessageUI
 
 class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
@@ -15,6 +17,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     @IBOutlet weak var sortButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     func didReceivedNewEvent(name: String, emoji: String, content: String, date: Date, dayleft: Double) {
         eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
         
@@ -23,11 +26,12 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
 
 
+    @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var eventTableView: UITableView!
     
     
     let eventController = EventController()
-    
+    var menuShowing = false 
     var event: Event?
        
    //MARK: - App Life Cycle
@@ -44,8 +48,20 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         eventTableView.dataSource = self
         eventTableView.delegate = self
          sortButton.isEnabled = eventController.events.count > 1 ? true : false
-       
+        setUpForMenuView()
     }
+    
+    
+    
+    
+    private func setUpForMenuView() {
+        menuViewLeadingConstraint.constant = -400
+        menuView.layer.shadowOpacity = 1
+        menuView.layer.shadowRadius = 6
+    }
+    
+    
+    
     
  // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,10 +83,10 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
          
         case Helper.swipeLeftSegue :
             guard let destVC = segue.destination as? NewEventTableVC else { return }
-//            guard  let sender = (sender as? EventCell) else { return }
-//            guard let indexPath = eventTableView.indexPath(for: sender) else { return }
-            guard let index = eventTableView.indexPathForSelectedRow else { return}
-            let event = eventController.events[index.row]
+            guard let index = sender as? IndexPath else { return }
+           
+           let event = eventController.events[index.row]
+           
 //             destVC.eventNameTextField.text = "Hello"
             destVC.event = event
             destVC.eventController = eventController
@@ -130,8 +146,26 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     
     @IBAction func settingTapped(_ sender: UIBarButtonItem) {
+        if menuShowing {
+                   menuViewLeadingConstraint.constant = -400
+                   UIView.animate(withDuration: 0.2, animations: {
+                                 self.view.layoutIfNeeded()
+                             })
+                   // Slide in
+                 
+               } else {
+                  menuViewLeadingConstraint.constant = 0
+                   // Slide out
+                   
+                   
+                   UIView.animate(withDuration: 0.2, animations: {
+                       self.view.layoutIfNeeded()
+                   })
         
-        
+               }
+               addButton.isEnabled = menuShowing
+               menuShowing.toggle()
+       
     }
     
    private func moveCell(action: UIAlertAction) {
@@ -146,7 +180,23 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
                
          
     }
+  
+    @IBAction func contactTapped(_ sender: UIButton) {
+        Helper.openTwitter()
+    }
+   
+    @IBAction func feedbackTapped(_ sender: UIButton) {
+        sendEmail()
+    }
+
+    @IBAction func appsTapped(_ sender: UIButton) {
+        
+    }
+    
+    
+   
     
 }
+
 
 

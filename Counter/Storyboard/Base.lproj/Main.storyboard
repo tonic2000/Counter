@@ -112,12 +112,66 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3o-s9-PrP" userLabel="MenuView">
+                                <rect key="frame" x="0.0" y="0.0" width="207" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-FM-xXZ">
+                                        <rect key="frame" x="0.0" y="79.999999999999972" width="207" height="358.33333333333326"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JH-qU-scI">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="119.33333333333333"/>
+                                                <color key="backgroundColor" red="0.58077979089999998" green="0.85704118009999997" blue="0.98737174270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                                <state key="normal" title="Contact">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="contactTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eZC-ub-iwH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMj-Rj-y8M">
+                                                <rect key="frame" x="0.0" y="119.33333333333334" width="207" height="119.66666666666666"/>
+                                                <color key="backgroundColor" red="0.97917634249999996" green="0.76972430940000003" blue="0.47991079089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                                <state key="normal" title="Feedback">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="feedbackTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FNi-2z-134"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psA-3f-Y8F">
+                                                <rect key="frame" x="0.0" y="239.00000000000003" width="207" height="119.33333333333334"/>
+                                                <color key="backgroundColor" red="0.3882825077" green="0.67118060589999995" blue="0.54511564970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                                <state key="normal" title="Apps">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="appsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="imR-L7-aZa"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UbO-FM-xXZ" firstAttribute="height" secondItem="Q3o-s9-PrP" secondAttribute="height" multiplier="0.4" id="35l-G3-86e"/>
+                                    <constraint firstAttribute="trailing" secondItem="UbO-FM-xXZ" secondAttribute="trailing" id="KPw-j2-FEJ"/>
+                                    <constraint firstItem="UbO-FM-xXZ" firstAttribute="top" secondItem="Q3o-s9-PrP" secondAttribute="top" constant="80" id="jir-Co-5el"/>
+                                    <constraint firstItem="UbO-FM-xXZ" firstAttribute="leading" secondItem="Q3o-s9-PrP" secondAttribute="leading" id="x1T-L9-qM7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Q3o-s9-PrP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="0tf-aY-dVh"/>
                             <constraint firstItem="yXr-cl-gLb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="19v-BZ-cL0"/>
+                            <constraint firstItem="Q3o-s9-PrP" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.5" id="3bJ-1u-cvb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="Q3o-s9-PrP" secondAttribute="top" constant="88" id="6aY-4I-eMf"/>
                             <constraint firstAttribute="bottom" secondItem="k0D-pb-8d5" secondAttribute="bottom" id="91W-fT-w2k"/>
                             <constraint firstItem="k0D-pb-8d5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NKp-Fv-glK"/>
                             <constraint firstItem="k0D-pb-8d5" firstAttribute="top" secondItem="yXr-cl-gLb" secondAttribute="bottom" id="QUv-Wg-QOS"/>
+                            <constraint firstItem="Q3o-s9-PrP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="esQ-2r-ISv"/>
                             <constraint firstItem="yXr-cl-gLb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ga8-9L-9f2"/>
                             <constraint firstItem="k0D-pb-8d5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lbv-a8-KlT"/>
                             <constraint firstItem="yXr-cl-gLb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vXE-Do-ePz"/>
@@ -139,12 +193,14 @@
                     <connections>
                         <outlet property="addButton" destination="k0D-pb-8d5" id="wFv-eO-SBy"/>
                         <outlet property="eventTableView" destination="yXr-cl-gLb" id="i97-N7-ixQ"/>
+                        <outlet property="menuView" destination="Q3o-s9-PrP" id="VOa-kD-3Hq"/>
+                        <outlet property="menuViewLeadingConstraint" destination="esQ-2r-ISv" id="6Ib-Oi-HHJ"/>
                         <outlet property="sortButton" destination="LYs-zm-fYl" id="3LQ-YK-TS3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="4"/>
+            <point key="canvasLocation" x="1140.5797101449277" y="3.3482142857142856"/>
         </scene>
         <!--New Event TableVC-->
         <scene sceneID="F0a-yU-V3b">
