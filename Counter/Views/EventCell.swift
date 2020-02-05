@@ -21,9 +21,10 @@ class EventCell: UITableViewCell  {
          startTimer()
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
+       
         eventDateLabel.text = dateFormatter.string(from: event.date)
 //        eventDaysLeft.text = event.daysLeft > 0.0 ? updateTime() : "☑️"
-        eventDaysLeft.backgroundColor = UIColor(displayP3Red: 38/255, green: 50/255, blue: 72/255, alpha: 1.0)
+        eventDaysLeft.backgroundColor = UIColor(displayP3Red: 176/255, green: 196/255, blue: 222/255, alpha: 1.0)
       
        updateTime()
       
@@ -38,7 +39,7 @@ class EventCell: UITableViewCell  {
    
     }
     
-    @objc func updateTime() -> String {
+    @objc func updateTime()  {
         
         let currentDate = Date()
         let calendar = Calendar.current
@@ -76,7 +77,7 @@ class EventCell: UITableViewCell  {
                   self.countdownTimer?.invalidate()
                   self.countdownTimer = nil }
         
-        return eventDaysLeft.text ?? "☑️"
+       
     }
 
     

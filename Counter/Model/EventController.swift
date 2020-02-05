@@ -76,13 +76,15 @@ class EventController  {
     
     
     
-    func update(event: Event, name: String, content: String?,date: Date) {
+    func update(event: Event, name: String, content: String?,date: Date, emoji: String , daysLeft: Double) {
       guard  let indexPath = events.firstIndex(of: event) else { return }
-        var scratch = event
+        let scratch = event
         scratch.name = name
         scratch.letterContent = content
         scratch.date = date
-        
+        scratch.emoji = emoji
+        scratch.daysLeft = daysLeft
+        saveToPersistStore()
         
         events.remove(at: indexPath)
         events.insert(scratch, at: indexPath)
