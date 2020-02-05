@@ -47,7 +47,9 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy HH:mm:ss")
     
     var event: Event?
+    
     weak var delegate2: EventDetailVCDelegate?
+    
     var countdownTimer : Timer?
 
     

@@ -76,7 +76,17 @@ class EventController  {
     
     
     
-    
+    func update(event: Event, name: String, content: String?,date: Date) {
+      guard  let indexPath = events.firstIndex(of: event) else { return }
+        var scratch = event
+        scratch.name = name
+        scratch.letterContent = content
+        scratch.date = date
+        
+        
+        events.remove(at: indexPath)
+        events.insert(scratch, at: indexPath)
+    }
     
     
 }

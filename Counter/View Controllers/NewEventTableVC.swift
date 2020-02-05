@@ -19,15 +19,20 @@ private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy")
 class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
 
     
-    var event: Event? {
-        didSet {
-            updateView()
-        }
+    var event: Event?
+//        didSet {
+//            updateView()
+//        }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return range.location < 40
     }
-       
-    
-    
-    
+   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+       //300 chars restriction
+       return textView.text.count + (text.count - range.length) <= 0
+   }
+
+  
     var eventController : EventController?
      
     weak var delegate: NewEventTableViewControllerDelegate?
@@ -38,21 +43,25 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var timeSwitch: UISwitch!
-    
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
     
     @IBAction private func textFieldDidChanged(_ sender: UITextField) {
         saveButton.isEnabled = eventNameTextField.hasText
         
     }
-    
+  
     func textViewDidEndEditing(_ textView: UITextView) {
         view.endEditing(true)
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-       updateView()
+        iconTextView.textContainer.maximumNumberOfLines = 1
+          updateView()
+        
+        
         eventNameTextField.becomeFirstResponder()
         eventNameTextField.delegate = self
         letterTextView.delegate = self
@@ -69,8 +78,8 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         if let event = event {
             eventNameTextField.text = event.name
             letterTextView.text = event.letterContent
-            
         }
+        title = "Add New Event"
     }
     
     
@@ -104,6 +113,14 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         
               let daysLeft = Date.differ(lhs: pickedDate, rhs: Date())
                
+        if let event = event  {
+            eventController?.update(event: event, name: name, content: content, date: pickedDate)
+        }
+//        } else {
+//            eventController?.createEvent(name: name, emoji: emoji, date: pickedDate, content: content, daysLeft: daysLeft)
+//        }
+        
+        
              delegate?.didReceivedNewEvent(name: name,
                                            emoji: emoji,
                                            content: content,

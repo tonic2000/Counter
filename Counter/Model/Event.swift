@@ -17,9 +17,7 @@ class Event : Codable , Comparable {
     static func < (lhs: Event, rhs: Event) -> Bool {
         return lhs.name < rhs.name
     }
-    
-   
-    
+ 
     var name: String
     var emoji: String
     var letterContent: String?
@@ -33,10 +31,5 @@ class Event : Codable , Comparable {
         self.date = date
         self.daysLeft = daysLeft
     }
-    
-    
-    
-    
-    
-    
+
 }

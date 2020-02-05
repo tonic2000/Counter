@@ -106,8 +106,8 @@
                                             <outlet property="eventDateLabel" destination="QWK-Ev-IRZ" id="bZh-La-XoI"/>
                                             <outlet property="eventDaysLeft" destination="Hdo-65-6Xz" id="L45-PD-kbf"/>
                                             <outlet property="eventNameLabel" destination="44R-IG-TlL" id="Lo5-Od-Z2M"/>
-                                            <segue destination="WfC-Oh-7n1" kind="presentation" identifier="ClickCellSegue" modalPresentationStyle="fullScreen" id="tW8-fT-laJ"/>
-                                            <segue destination="jVB-l2-JpW" kind="show" identifier="SwipeLeftSegue" trigger="accessoryAction" id="tmj-g9-dYJ"/>
+                                            <segue destination="jVB-l2-JpW" kind="show" identifier="SwipeLeftSegue" trigger="accessoryAction" id="XiV-5V-VvN"/>
+                                            <segue destination="WfC-Oh-7n1" kind="presentation" identifier="ClickCellSegue" modalPresentationStyle="fullScreen" id="FHs-lf-my3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -192,7 +192,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="😌" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="😌" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght" customClass="EmojiKeyboard" customModule="Counter" customModuleProvider="target">
                                                     <rect key="frame" x="157" y="19.666666666666671" width="100" height="100"/>
                                                     <color key="backgroundColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -353,7 +353,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYm-xG-dfI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="1027"/>
+            <point key="canvasLocation" x="1142" y="1027"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mhI-rX-glS">
@@ -748,6 +748,6 @@
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tmj-g9-dYJ"/>
+        <segue reference="XiV-5V-VvN"/>
     </inferredMetricsTieBreakers>
 </document>

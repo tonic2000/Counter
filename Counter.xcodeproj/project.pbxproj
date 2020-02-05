@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B633BA2323EB3AA000CD0A5D /* EmojiKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633BA2223EB3AA000CD0A5D /* EmojiKeyboard.swift */; };
 		B644B49423EAD3CA0090CFD1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644B49323EAD3CA0090CFD1 /* Extensions.swift */; };
 		B6618C4523E893DF00B9785E /* NewEventTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6618C4423E893DF00B9785E /* NewEventTableVC.swift */; };
 		B6618C4723E894AE00B9785E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6618C4623E894AE00B9785E /* Event.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B633BA2223EB3AA000CD0A5D /* EmojiKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiKeyboard.swift; sourceTree = "<group>"; };
 		B644B49323EAD3CA0090CFD1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B6618C4423E893DF00B9785E /* NewEventTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventTableVC.swift; sourceTree = "<group>"; };
 		B6618C4623E894AE00B9785E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				B6618C5123E89AA600B9785E /* Helper.swift */,
+				B633BA2223EB3AA000CD0A5D /* EmojiKeyboard.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				B6785B0323E5122D00F9DD67 /* MainVC.swift in Sources */,
 				B6618C4523E893DF00B9785E /* NewEventTableVC.swift in Sources */,
 				B6618C4A23E895D400B9785E /* EventController.swift in Sources */,
+				B633BA2323EB3AA000CD0A5D /* EmojiKeyboard.swift in Sources */,
 				B6618C5723E9900D00B9785E /* AlertViewController.swift in Sources */,
 				B6618C5523E8DC8900B9785E /* EventDetailVC.swift in Sources */,
 				B6618C5923E9B59600B9785E /* Quotes.swift in Sources */,
