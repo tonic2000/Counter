@@ -47,23 +47,22 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         super.viewDidLoad()
         eventTableView.dataSource = self
         eventTableView.delegate = self
+        
          sortButton.isEnabled = eventController.events.count > 1 ? true : false
         setUpForMenuView()
-//        navigationItem.rightBarButtonItem?.tintColor = 
+        
+        eventTableView.tableFooterView = UIView()
+        
+   //MARK: - Hide row when not in used.
+
     }
-    
-    
-    
     
     private func setUpForMenuView() {
         menuViewLeadingConstraint.constant = -400
         menuView.layer.shadowOpacity = 1
         menuView.layer.shadowRadius = 6
     }
-    
-    
-    
-    
+ 
  // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
@@ -109,18 +108,6 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         })
       
     }
-    
-    
-    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
-        menuViewLeadingConstraint.constant =  -400
-            menuShowing.toggle()
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-    }
-    
-    
-    
     
     
     @IBAction func addTapped(_ sender: UIButton) {
@@ -185,7 +172,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
                    })
         
                }
-               addButton.isEnabled = menuShowing
+              
                menuShowing.toggle()
        
     }

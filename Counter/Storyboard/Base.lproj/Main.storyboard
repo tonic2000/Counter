@@ -17,11 +17,11 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-pb-8d5">
                                 <rect key="frame" x="0.0" y="816" width="414" height="80"/>
-                                <color key="backgroundColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.3882825077" green="0.67118060589999995" blue="0.54511564970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="4O7-JD-dmo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
                                 <state key="normal" title="Add new countdown">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -30,7 +30,7 @@
                                     <segue destination="jVB-l2-JpW" kind="show" identifier="AddEventSegue" id="4MG-fa-dbH"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXr-cl-gLb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXr-cl-gLb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="816"/>
                                 <color key="separatorColor" red="0.3882825077" green="0.67118060589999995" blue="0.54511564970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -180,7 +180,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="TVG-7d-umT" appends="YES" id="exs-76-Lnr"/>
-                            <outletCollection property="gestureRecognizers" destination="jrl-Xe-InA" appends="YES" id="Clw-M2-GzL"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Counter" id="vX5-0f-1bt">
@@ -211,11 +210,6 @@
                         <action selector="swipeGesture:" destination="BYZ-38-t0r" id="9Fq-Mt-TWO"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <tapGestureRecognizer id="jrl-Xe-InA">
-                    <connections>
-                        <action selector="tapGesture:" destination="BYZ-38-t0r" id="0vD-6F-wRi"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1140.5797101449277" y="3.3482142857142856"/>
         </scene>
