@@ -19,10 +19,10 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     func didReceivedNewEvent(name: String, emoji: String, content: String, date: Date, dayleft: Double) {
-        eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
+//        eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
         
         print(eventController.events.count)
-        eventTableView.reloadData()
+//        eventTableView.reloadData()
     }
 
 
@@ -82,15 +82,11 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             destVC.event = event
          
         case Helper.swipeLeftSegue :
-            guard let destVC = segue.destination as? NewEventTableVC else { return }
-            guard let index = sender as? IndexPath else { return }
-           
-           let event = eventController.events[index.row]
-           
-//             destVC.eventNameTextField.text = "Hello"
-            destVC.event = event
-            destVC.eventController = eventController
-            
+            guard let index = sender as? IndexPath,
+                           let destVC = segue.destination as? NewEventTableVC else { return }
+                       let event = eventController.events[index.row]
+                       destVC.event = event
+                       destVC.eventController = eventController
             
             
             //MARK:- TODO 
