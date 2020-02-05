@@ -12,12 +12,9 @@ import UIKit
 protocol NewEventTableViewControllerDelegate : AnyObject {
     func didReceivedNewEvent(name:String,emoji:String,content:String,date:Date,dayleft: Double)
 }
-private var dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "E, d MMM yyyy  "
-    formatter.timeZone = TimeZone(secondsFromGMT: 0)
-    return formatter
-}()
+
+
+private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy")
 
 class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
 
@@ -44,9 +41,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     func textViewDidEndEditing(_ textView: UITextView) {
         view.endEditing(true)
     }
-    
-    
-  
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         eventNameTextField.becomeFirstResponder()
@@ -101,13 +96,9 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
              navigationController?.popViewController(animated: true)
               setNotification()
     }
-       
-    
-
-   
-    
-    func setNotification() {
-           let center = UNUserNotificationCenter.current()
+ 
+    private func setNotification() {
+        let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
         content.title = "Hi there, how is it going?."
@@ -119,22 +110,18 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: abs(interval) , repeats: false)
         
         let reguest = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
-           
-          
-           
-           center.add (reguest) { (error) in
-               if error != nil {
-                   print("Error: \(error?.localizedDescription ?? "")")
-               }
-           }
-           
-           
-       }
-    
-
-}
-extension Date {
-    static func differ(lhs:Date,rhs:Date) -> TimeInterval {
-        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+        
+        
+        
+        center.add (reguest) { (error) in
+            if error != nil {
+                print("Error: \(error?.localizedDescription ?? "")")
+            }
+        }
+        
+        
     }
+    
+    
 }
+

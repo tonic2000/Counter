@@ -15,4 +15,13 @@ class Helper {
     static let clickCellSegue = "ClickCellSegue"
     static let clickSettingSegue = "ClickSettingSegue"
     
+    
+    
+   static func createDateFormatter(format: String) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.timeZone = .current
+        return formatter
+    }
+    
 }
