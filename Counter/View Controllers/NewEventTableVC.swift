@@ -19,7 +19,7 @@ private var dateFormatter: DateFormatter = {
     return formatter
 }()
 
-class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate {
+class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
 
     
     var event: Event?
@@ -40,15 +40,31 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         saveButton.isEnabled = eventNameTextField.hasText
         
     }
- 
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        view.endEditing(true)
+    }
+    
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         eventNameTextField.becomeFirstResponder()
         eventNameTextField.delegate = self
         letterTextView.delegate = self
         timeSwitch.isOn = false
+        
+        // Dismiss keyboard when tapped on screen
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
+        tap.delegate = self
     }
     
+    
+   @objc func dismissKeyboard() {
+           self.view.endEditing(true)
+       }
     
     @IBAction func switchTapped(_ sender: UISwitch) {
         
@@ -76,14 +92,19 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         
               let daysLeft = Date.differ(lhs: pickedDate, rhs: Date())
                
-             delegate?.didReceivedNewEvent(name: name, emoji: emoji, content: content, date: pickedDate, dayleft: (daysLeft / 86400) )
+             delegate?.didReceivedNewEvent(name: name,
+                                           emoji: emoji,
+                                           content: content,
+                                           date: pickedDate,
+                                           dayleft: (daysLeft / 86400) )
               //MARK:-  Push notification
              navigationController?.popViewController(animated: true)
               setNotification()
     }
+       
     
-    
-    
+
+   
     
     func setNotification() {
            let center = UNUserNotificationCenter.current()
@@ -93,8 +114,10 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         content.body = "Here is your message from the future: \(letterTextView.text ?? "Have a good day!")"
         content.sound = .defaultCritical
         
-        let interval = datePicker.date.timeIntervalSince(Date()) // 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval , repeats: false)
+        let interval = datePicker.date.timeIntervalSince(Date()) //
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: abs(interval) , repeats: false)
+        
         let reguest = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
            
           
