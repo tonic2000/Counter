@@ -26,7 +26,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     @IBOutlet weak var eventTableView: UITableView!
     
     
-    var eventController = EventController()
+    let eventController = EventController()
     
     var event: Event?
        
@@ -43,7 +43,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         super.viewDidLoad()
         eventTableView.dataSource = self
         eventTableView.delegate = self
-        
+         sortButton.isEnabled = eventController.events.count > 1 ? true : false
        
     }
     
@@ -65,13 +65,18 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             destVC.delegate2 = self
             destVC.event = event
          
-        case Helper.swipeLeftSegue: break
-//            guard let destVC = segue.destination as? NewEventTableVC else { return }
+        case Helper.swipeLeftSegue :
+            guard let destVC = segue.destination as? NewEventTableVC else { return }
 //            guard  let sender = (sender as? EventCell) else { return }
-////            guard let indexPath = eventTableView.indexPath(for: sender) else { return }
-//            guard let index = eventTableView.indexPathForSelectedRow else { return}
-//            let event = eventController.events[index.row]
-//            destVC.event    = event
+//            guard let indexPath = eventTableView.indexPath(for: sender) else { return }
+            guard let index = eventTableView.indexPathForSelectedRow else { return}
+            let event = eventController.events[index.row]
+//             destVC.eventNameTextField.text = "Hello"
+            destVC.event = event
+            destVC.eventController = eventController
+            
+            
+            
             //MARK:- TODO 
         default:
             break

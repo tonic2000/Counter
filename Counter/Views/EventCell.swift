@@ -11,6 +11,7 @@ import Foundation
 
 class EventCell: UITableViewCell  {
     var countdownTimer : Timer?
+    
     let dateFormatter  = Helper.createDateFormatter(format:" E, d MMM yyyy")
     
     
@@ -18,14 +19,13 @@ class EventCell: UITableViewCell  {
     private  func updateViews() {
         guard let event = event else { return }
          startTimer()
-        
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
         eventDateLabel.text = dateFormatter.string(from: event.date)
-        eventDaysLeft.text = event.daysLeft > 0.0 ? updateTime() : "☑️"
+//        eventDaysLeft.text = event.daysLeft > 0.0 ? updateTime() : "☑️"
         eventDaysLeft.backgroundColor = UIColor(displayP3Red: 38/255, green: 50/255, blue: 72/255, alpha: 1.0)
       
-       
+       updateTime()
       
     }
    private func startTimer() {
@@ -43,13 +43,15 @@ class EventCell: UITableViewCell  {
         let currentDate = Date()
         let calendar = Calendar.current
         let diffDateComponents = calendar.dateComponents([.day,.hour,.minute,.second], from: currentDate,to: event!.date)
-        switch Int(event!.daysLeft) {
-            // MARK: - TODO 
-        case let x where x <= 0:
-            eventDaysLeft.text = "☑️"
-             countdownTimer = nil
-            countdownTimer?.invalidate()
 
+        switch Int(event!.daysLeft) {
+            
+            // MARK: - TODO
+        case  ...0 :
+            eventDaysLeft.text = "☑️"
+            
+            countdownTimer?.invalidate()
+            countdownTimer = nil
             
         case 0...59:
             eventDaysLeft.text = "\(diffDateComponents.second!) seconds left."
@@ -60,9 +62,21 @@ class EventCell: UITableViewCell  {
         case let x where x >= 86400 :
             eventDaysLeft.text = "\(diffDateComponents.day!) days left."
         default:
+            eventDaysLeft.text = "☑️"
+            countdownTimer?.invalidate()
             break
         }
-        return eventDaysLeft.text!
+        if diffDateComponents.second == 0  &&
+                  diffDateComponents.minute == 0 &&
+                  diffDateComponents.hour == 0 &&
+                  diffDateComponents.day == 0 &&
+                  diffDateComponents.month == 0 &&
+                  diffDateComponents.year == 0
+              {
+                  self.countdownTimer?.invalidate()
+                  self.countdownTimer = nil }
+        
+        return eventDaysLeft.text ?? "☑️"
     }
 
     
@@ -76,7 +90,10 @@ class EventCell: UITableViewCell  {
      var event: Event? {
          didSet {
              updateViews()
-
+//            if event!.daysLeft <= 0.0 {
+//                countdownTimer?.invalidate()
+//                countdownTimer = nil
+//            }
          }
      }
     
