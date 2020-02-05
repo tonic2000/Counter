@@ -116,10 +116,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="207" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-FM-xXZ">
-                                        <rect key="frame" x="0.0" y="79.999999999999972" width="207" height="358.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="80" width="207" height="268.66666666666669"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JH-qU-scI">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="119.33333333333333"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="89.666666666666671"/>
                                                 <color key="backgroundColor" red="0.58077979089999998" green="0.85704118009999997" blue="0.98737174270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                                                 <state key="normal" title="Contact">
@@ -130,7 +130,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMj-Rj-y8M">
-                                                <rect key="frame" x="0.0" y="119.33333333333334" width="207" height="119.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="89.666666666666657" width="207" height="89.666666666666657"/>
                                                 <color key="backgroundColor" red="0.97917634249999996" green="0.76972430940000003" blue="0.47991079089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                                                 <state key="normal" title="Feedback">
@@ -141,7 +141,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psA-3f-Y8F">
-                                                <rect key="frame" x="0.0" y="239.00000000000003" width="207" height="119.33333333333334"/>
+                                                <rect key="frame" x="0.0" y="179.33333333333331" width="207" height="89.333333333333314"/>
                                                 <color key="backgroundColor" red="0.3882825077" green="0.67118060589999995" blue="0.54511564970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                                                 <state key="normal" title="Apps">
@@ -156,13 +156,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="UbO-FM-xXZ" firstAttribute="height" secondItem="Q3o-s9-PrP" secondAttribute="height" multiplier="0.4" id="35l-G3-86e"/>
+                                    <constraint firstItem="UbO-FM-xXZ" firstAttribute="height" secondItem="Q3o-s9-PrP" secondAttribute="height" multiplier="0.3" id="35l-G3-86e"/>
                                     <constraint firstAttribute="trailing" secondItem="UbO-FM-xXZ" secondAttribute="trailing" id="KPw-j2-FEJ"/>
                                     <constraint firstItem="UbO-FM-xXZ" firstAttribute="top" secondItem="Q3o-s9-PrP" secondAttribute="top" constant="80" id="jir-Co-5el"/>
                                     <constraint firstItem="UbO-FM-xXZ" firstAttribute="leading" secondItem="Q3o-s9-PrP" secondAttribute="leading" id="x1T-L9-qM7"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Q3o-s9-PrP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="0tf-aY-dVh"/>
                             <constraint firstItem="yXr-cl-gLb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="19v-BZ-cL0"/>
@@ -177,14 +178,20 @@
                             <constraint firstItem="yXr-cl-gLb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vXE-Do-ePz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="TVG-7d-umT" appends="YES" id="exs-76-Lnr"/>
+                            <outletCollection property="gestureRecognizers" destination="jrl-Xe-InA" appends="YES" id="Clw-M2-GzL"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Counter" id="vX5-0f-1bt">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="osd-EK-RDw">
+                            <color key="tintColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="settingTapped:" destination="BYZ-38-t0r" id="Cas-l4-1Wg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Sort" id="LYs-zm-fYl">
+                            <color key="tintColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sortTapped:" destination="BYZ-38-t0r" id="Bry-KJ-XVe"/>
                             </connections>
@@ -199,6 +206,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="TVG-7d-umT">
+                    <connections>
+                        <action selector="swipeGesture:" destination="BYZ-38-t0r" id="9Fq-Mt-TWO"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="jrl-Xe-InA">
+                    <connections>
+                        <action selector="tapGesture:" destination="BYZ-38-t0r" id="0vD-6F-wRi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1140.5797101449277" y="3.3482142857142856"/>
         </scene>
@@ -806,4 +823,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="XiV-5V-VvN"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

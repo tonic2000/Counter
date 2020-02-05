@@ -126,8 +126,8 @@
 				B6618C4823E894BA00B9785E /* Model */,
 				B6785B1423E516C900F9DD67 /* View Controllers */,
 				B6785B1323E516C300F9DD67 /* Storyboard */,
-				B6785B1223E5131200F9DD67 /* Resources */,
 				B644B49523EAD3CD0090CFD1 /* Extensions */,
+				B6785B1223E5131200F9DD67 /* Resources */,
 			);
 			path = Counter;
 			sourceTree = "<group>";

@@ -42,7 +42,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
        
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell123", for: indexPath) as? EventCell else
         {
@@ -53,7 +52,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         cell.event = event
         
         return cell
-        
+ 
     }
     
   //Swipe to delete
@@ -117,10 +116,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
            
                return UISwipeActionsConfiguration(actions: [modifyAction])
     }
-    
-    
-   
-    
+ 
 }
 //MARK:- Send Email
 extension MainVC: MFMailComposeViewControllerDelegate {

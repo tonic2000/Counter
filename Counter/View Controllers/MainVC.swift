@@ -49,6 +49,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         eventTableView.delegate = self
          sortButton.isEnabled = eventController.events.count > 1 ? true : false
         setUpForMenuView()
+//        navigationItem.rightBarButtonItem?.tintColor = 
     }
     
     
@@ -100,7 +101,28 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         }
     }
 
-
+    @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
+        menuViewLeadingConstraint.constant =  -400
+        menuShowing.toggle()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
+      
+    }
+    
+    
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        menuViewLeadingConstraint.constant =  -400
+            menuShowing.toggle()
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+    }
+    
+    
+    
+    
+    
     @IBAction func addTapped(_ sender: UIButton) {
         //Segue 
     }
@@ -190,7 +212,8 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
 
     @IBAction func appsTapped(_ sender: UIButton) {
-        
+        let urlStr = "https://apps.apple.com/us/developer/thinh-nguyen/id1475297118"
+        UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
     }
     
     
