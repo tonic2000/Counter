@@ -25,8 +25,7 @@ class AlertViewController: UIViewController , UIGestureRecognizerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.delegate = self
         view.addGestureRecognizer(tap)
-       
-        
+
         quoteLabel.text = Quotes.quotes.randomElement()
         
     }
