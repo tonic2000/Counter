@@ -20,16 +20,16 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
 
     
     var event: Event?
+      var eventController : EventController?
+        
+       weak var delegate: NewEventTableViewControllerDelegate?
+//
+//    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        return range.location < 40
+//    }
 
-    
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return range.location < 40
-    }
 
-
-    var eventController : EventController?
-     
-    weak var delegate: NewEventTableViewControllerDelegate?
+   
     
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var iconTextView: UITextView!
@@ -52,7 +52,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        iconTextView.textContainer.maximumNumberOfLines = 1
+//        iconTextView.textContainer.maximumNumberOfLines = 1
           updateView()
        
         
@@ -69,11 +69,15 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     }
     
     func updateView() {
-        if let event = event {
-            eventNameTextField.text = event.name
-            letterTextView.text = event.letterContent
-        }
-        title = "Add New Event"
+        guard let event = event else {
+                   title = "Add new event"
+                   return }
+               
+               title = event.name
+               eventNameTextField.text = event.name
+               letterTextView.text = event.letterContent
+               iconTextView.text = event.emoji
+               datePicker.date = event.date
     }
     
     
@@ -107,12 +111,14 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         
               let daysLeft = Date.differ(lhs: pickedDate, rhs: Date())
                
-        if let event = event  {
-            eventController?.update(event: event, name: name, content: content, date: pickedDate,emoji: emoji,daysLeft: daysLeft)
+              
+         if let event = event  {
+            eventController?.update(event: event, name: name, content: content, date: pickedDate, emoji: emoji, daysLeft: daysLeft)
+            
+         } else {
+            eventController?.createEvent(name: name, emoji: emoji, date: pickedDate, content: content, daysLeft: daysLeft)
         }
-//        } else {
-//            eventController?.createEvent(name: name, emoji: emoji, date: pickedDate, content: content, daysLeft: daysLeft)
-//        }
+
         
         
              delegate?.didReceivedNewEvent(name: name,

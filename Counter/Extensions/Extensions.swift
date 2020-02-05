@@ -98,24 +98,19 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    
-        let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            self.performSegue(withIdentifier: Helper.swipeLeftSegue, sender: indexPath)
-            //MARK: - TODO
-            
-            
-          print("Trying to edit for pass data for cell")
-                   
-                   success(true)
-               })
-             
-        modifyAction.backgroundColor = UIColor(displayP3Red: 216/255, green: 191/255, blue: 216/255, alpha: 1.0)
-        modifyAction.image = UIImage(systemName: "gobackward")
-           
-               return UISwipeActionsConfiguration(actions: [modifyAction])
-    }
+     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+       
+           let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+               
+               self.performSegue(withIdentifier: Helper.swipeLeftSegue, sender: indexPath) // "A-ha" 1
+                      success(true)
+                  })
+                
+           modifyAction.backgroundColor = UIColor(displayP3Red: 216/255, green: 191/255, blue: 216/255, alpha: 1.0)
+           modifyAction.image = UIImage(systemName: "gobackward")
+              
+                  return UISwipeActionsConfiguration(actions: [modifyAction])
+       }
  
 }
 //MARK:- Send Email
