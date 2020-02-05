@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import MessageUI
 
 extension EventDetailVC: AlertViewControllerDelegate {
     func didTapOnScreen() {
@@ -66,7 +66,6 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 //        }
 //    }
 
-   
 //Move cell
      func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -123,7 +122,36 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
    
     
 }
+//MARK:- Send Email
+extension MainVC: MFMailComposeViewControllerDelegate {
+    func sendEmail() {
+           if MFMailComposeViewController.canSendMail() {
+               let mail = MFMailComposeViewController()
+               mail.mailComposeDelegate = self
+               mail.setToRecipients(["ptnguyen1901@gmail.com"])
+               mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
 
+               present(mail, animated: true)
+           } else {
+             let ac = UIAlertController(title: "Error sending email", message: nil, preferredStyle: .alert)
+             ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+             present(ac, animated: true)
+           }
+       }
+
+       func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+         
+         if let _ = error {
+             controller.dismiss(animated: true)
+         }
+         switch result {
+         case .cancelled:
+            controller.dismiss(animated: true)
+         default:
+            controller.dismiss(animated: true)
+         }
+       }
+}
 
 
 
