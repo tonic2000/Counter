@@ -24,9 +24,9 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         
        weak var delegate: NewEventTableViewControllerDelegate?
 //
-//    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        return range.location < 40
-//    }
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return range.location < 40
+    }
 
 
    
@@ -52,7 +52,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        iconTextView.textContainer.maximumNumberOfLines = 1
+        iconTextView.textContainer.maximumNumberOfLines = 1
           updateView()
        
         

@@ -91,10 +91,7 @@ class EventCell: UITableViewCell  {
      var event: Event? {
          didSet {
              updateViews()
-//            if event!.daysLeft <= 0.0 {
-//                countdownTimer?.invalidate()
-//                countdownTimer = nil
-//            }
+  
          }
      }
     
