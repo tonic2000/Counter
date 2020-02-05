@@ -43,7 +43,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         super.viewDidLoad()
         eventTableView.dataSource = self
         eventTableView.delegate = self
-    
+        
        
     }
     
@@ -64,7 +64,15 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             let event = eventController.events[indexPath.row]
             destVC.delegate2 = self
             destVC.event = event
-      
+         
+        case Helper.swipeLeftSegue: break
+//            guard let destVC = segue.destination as? NewEventTableVC else { return }
+//            guard  let sender = (sender as? EventCell) else { return }
+////            guard let indexPath = eventTableView.indexPath(for: sender) else { return }
+//            guard let index = eventTableView.indexPathForSelectedRow else { return}
+//            let event = eventController.events[index.row]
+//            destVC.event    = event
+            //MARK:- TODO 
         default:
             break
        

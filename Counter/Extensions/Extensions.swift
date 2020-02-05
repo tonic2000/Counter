@@ -82,7 +82,24 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         eventController.events.insert(movedObject, at: destinationIndexPath.row)
     }
   
-
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    
+         let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            self.performSegue(withIdentifier: Helper.swipeLeftSegue, sender: self)
+          
+                   
+                   success(true)
+               })
+             
+        modifyAction.backgroundColor = UIColor(displayP3Red: 216/255, green: 191/255, blue: 216/255, alpha: 1.0)
+        
+           
+               return UISwipeActionsConfiguration(actions: [modifyAction])
+    }
+    
+    
+   
     
 }
 

@@ -14,7 +14,7 @@ class Helper {
     static let addButtonSegue = "AddEventSegue"
     static let clickCellSegue = "ClickCellSegue"
     static let clickSettingSegue = "ClickSettingSegue"
-    
+    static let swipeLeftSegue = "SwipeLeftSegue"
     
     
    static func createDateFormatter(format: String) -> DateFormatter {

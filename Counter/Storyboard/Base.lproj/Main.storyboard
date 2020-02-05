@@ -107,6 +107,7 @@
                                             <outlet property="eventDaysLeft" destination="Hdo-65-6Xz" id="L45-PD-kbf"/>
                                             <outlet property="eventNameLabel" destination="44R-IG-TlL" id="Lo5-Od-Z2M"/>
                                             <segue destination="WfC-Oh-7n1" kind="presentation" identifier="ClickCellSegue" modalPresentationStyle="fullScreen" id="tW8-fT-laJ"/>
+                                            <segue destination="jVB-l2-JpW" kind="show" identifier="SwipeLeftSegue" trigger="accessoryAction" id="tmj-g9-dYJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -746,4 +747,7 @@
         <image name="line.horizontal.3" catalog="system" width="64" height="32"/>
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="tmj-g9-dYJ"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -19,7 +19,15 @@ private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy")
 class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
 
     
-    var event: Event?
+    var event: Event? {
+        didSet {
+            updateView()
+        }
+    }
+       
+    
+    
+    
     var eventController : EventController?
      
     weak var delegate: NewEventTableViewControllerDelegate?
@@ -44,6 +52,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
    
     override func viewDidLoad() {
         super.viewDidLoad()
+       updateView()
         eventNameTextField.becomeFirstResponder()
         eventNameTextField.delegate = self
         letterTextView.delegate = self
@@ -54,6 +63,14 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
                                                                 action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tap)
         tap.delegate = self
+    }
+    
+    func updateView() {
+        if let event = event {
+            eventNameTextField.text = event.name
+            letterTextView.text = event.letterContent
+            
+        }
     }
     
     
@@ -91,7 +108,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
                                            emoji: emoji,
                                            content: content,
                                            date: pickedDate,
-                                           dayleft: (daysLeft / 86400) )
+                                           dayleft: daysLeft)
               //MARK:-  Push notification
              navigationController?.popViewController(animated: true)
               setNotification()
