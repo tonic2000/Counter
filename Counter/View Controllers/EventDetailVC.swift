@@ -8,12 +8,16 @@
 
 import UIKit
 
+
 protocol EventDetailVCDelegate : AnyObject {
     func didEndTimer()
 }
 
 
 class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
+    
+  
+    
     
    
     @IBOutlet weak var nameEventLabel: UILabel!
@@ -32,8 +36,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
   
-      
-    
+
     
     @IBOutlet weak var yearsNumLabel: UILabel!
     @IBOutlet weak var dayNumLabel: UILabel!
@@ -45,24 +48,25 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
     
     private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy HH:mm:ss")
-    
+     
     var event: Event?
     
     weak var delegate2: EventDetailVCDelegate?
     
     var countdownTimer : Timer?
 
-    
+  
     //MARK:-  App Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
           self.updateTime()
+       
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         self.startTimer()
         self.updateView()
         
@@ -70,9 +74,8 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         tap.delegate = self
         
         emojiBackgroundView.addGestureRecognizer(tap)
-        
+      
     }
-    
    
    private func startTimer() {
     
@@ -146,7 +149,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         emojiBackgroundView.layer.cornerRadius = emojiBackgroundView.frame.size.width / 2
         emojiBackgroundView.layer.borderColor = UIColor.gray.cgColor
         emojiBackgroundView.clipsToBounds = true
-        emojiBackgroundView.layer.borderWidth = 5.0
+    emojiBackgroundView.layer.borderWidth = 5
         
         backButtonBackgroundView.layer.cornerRadius = backButtonBackgroundView.frame.size.width / 2
         shareButtonBackgroundView.layer.cornerRadius = shareButtonBackgroundView.frame.size.width / 2
