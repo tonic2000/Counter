@@ -12,7 +12,7 @@ Add pulse animation to image view.
 
 
 
- ![](TheCounterApp.gif)
+ ![](counterapp.gif)
 
 
 
