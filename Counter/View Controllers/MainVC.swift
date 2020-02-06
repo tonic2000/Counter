@@ -22,7 +22,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
 //        eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
         
         print(eventController.events.count)
-//        eventTableView.reloadData()
+        eventTableView.reloadData()
     }
 
 
