@@ -9,9 +9,7 @@ Counter App help people keep track of incoming events and have a good laugh by r
 
 
 
-
-
-                                     ![](TheCounter.gif)
+ ![](TheCounter.gif)
 
 
 
