@@ -5,7 +5,8 @@
 Counter App help people keep track of incoming events and have a good laugh by reading funny quotes.
 
 # Future plan: 
-Fetch funny quotes from the internet
+Fetch funny quotes from the internet.
+
 Add pulse animation to image view.
 
 
