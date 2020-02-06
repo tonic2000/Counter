@@ -136,7 +136,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         
         let content = UNMutableNotificationContent()
         content.title = "Hi there, how is it going?."
-        content.body = "Here is your message from the future: \(letterTextView.text ?? "Have a good day!")"
+        content.body = "Message from the future: \(letterTextView.text ?? "Have a good day!")"
         content.sound = .defaultCritical
         
         let interval = datePicker.date.timeIntervalSince(Date()) //
