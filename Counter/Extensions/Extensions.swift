@@ -124,7 +124,7 @@ extension MainVC: MFMailComposeViewControllerDelegate {
 
                present(mail, animated: true)
            } else {
-             let ac = UIAlertController(title: "Error sending email", message: nil, preferredStyle: .alert)
+             let ac = UIAlertController(title: "Error sending email", message: "Your device does not support email, please try again later.", preferredStyle: .alert)
              ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
              present(ac, animated: true)
            }

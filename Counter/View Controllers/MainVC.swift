@@ -12,6 +12,9 @@ import MessageUI
 
 class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
+    
+  
+    
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var sortButton: UIBarButtonItem!
@@ -51,10 +54,12 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
          sortButton.isEnabled = eventController.events.count > 1 ? true : false
         setUpForMenuView()
         
-        eventTableView.tableFooterView = UIView()
+       
         
    //MARK: - Hide row when not in used.
-
+ eventTableView.tableFooterView = UIView()
+     
+        
     }
     
     private func setUpForMenuView() {
@@ -99,6 +104,8 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
         menuViewLeadingConstraint.constant =  -400
         menuShowing.toggle()
+        eventTableView.alpha = 1.0
+                   addButton.alpha = 1.0
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
@@ -150,27 +157,34 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
           
     }
     
+   // MARK: - Side menu
+    
     @IBAction func settingTapped(_ sender: UIBarButtonItem) {
+
         if menuShowing {
-                   menuViewLeadingConstraint.constant = -400
-                   UIView.animate(withDuration: 0.2, animations: {
-                                 self.view.layoutIfNeeded()
-                             })
-                   // Slide in
-                 
-               } else {
-                  menuViewLeadingConstraint.constant = 0
-                   // Slide out
-                   
-                   
-                   UIView.animate(withDuration: 0.2, animations: {
-                       self.view.layoutIfNeeded()
-                   })
+            // Slide in
+            menuViewLeadingConstraint.constant = -400
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+            eventTableView.alpha = 1.0
+            addButton.alpha = 1.0
+            navigationController?.navigationBar.alpha = 1.0
+            
+        } else {
+            // Slide out
+            addButton.alpha = 0.5
+            menuViewLeadingConstraint.constant = 0
+            navigationController?.navigationBar.alpha = 0.5
+            eventTableView.alpha = 0.5
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+        }
         
-               }
-              
-               menuShowing.toggle()
-       
+        menuShowing.toggle()
+        
     }
     
    private func moveCell(action: UIAlertAction) {
