@@ -15,10 +15,6 @@ protocol EventDetailVCDelegate : AnyObject {
 
 
 class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
-    
-  
-    
-    
    
     @IBOutlet weak var nameEventLabel: UILabel!
     @IBOutlet weak var shareButtonBackgroundView: UIView!
@@ -55,7 +51,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
     var countdownTimer : Timer?
 
-  
+   
     //MARK:-  App Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,9 +62,9 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
-        self.startTimer()
-        self.updateView()
+        
+        startTimer()
+        updateView()
         
         let tap  = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         tap.delegate = self
@@ -77,7 +73,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
       
     }
    
-   private func startTimer() {
+    func startTimer() {
     
     countdownTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
@@ -86,6 +82,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
                                              repeats: true)
    
     }
+  
 
     @objc func updateTime() {
 
@@ -132,8 +129,9 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
                 diffDateComponents.month == 0 &&
                 diffDateComponents.year == 0
             {
-                self.countdownTimer?.invalidate()
                 self.countdownTimer = nil
+                self.countdownTimer?.invalidate()
+                
                 self.dismiss(animated: true, completion: nil)
                 self.delegate2?.didEndTimer()
             }
@@ -145,20 +143,20 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
  
    private func updateView() {
          guard let event = event else { return }
-        
-        emojiBackgroundView.layer.cornerRadius = emojiBackgroundView.frame.size.width / 2
-        emojiBackgroundView.layer.borderColor = UIColor.gray.cgColor
-        emojiBackgroundView.clipsToBounds = true
+    
+    emojiBackgroundView.layer.cornerRadius = emojiBackgroundView.frame.size.width / 2
+    emojiBackgroundView.layer.borderColor = UIColor.gray.cgColor
+    emojiBackgroundView.clipsToBounds = true
     emojiBackgroundView.layer.borderWidth = 5
-        
-        backButtonBackgroundView.layer.cornerRadius = backButtonBackgroundView.frame.size.width / 2
-        shareButtonBackgroundView.layer.cornerRadius = shareButtonBackgroundView.frame.size.width / 2
-       
-        nameEventLabel.text = event.name
-        date1Label.text = dateFormatter.string(from: event.date)
-        
-        emojiLabel.text = event.emoji
-        emojiLabel.textAlignment = .center
+    
+    backButtonBackgroundView.layer.cornerRadius = backButtonBackgroundView.frame.size.width / 2
+    shareButtonBackgroundView.layer.cornerRadius = shareButtonBackgroundView.frame.size.width / 2
+    
+    nameEventLabel.text = event.name
+    date1Label.text = dateFormatter.string(from: event.date)
+    
+    emojiLabel.text = event.emoji
+    emojiLabel.textAlignment = .center
     
     }
 
@@ -186,9 +184,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
         myAlert.modalTransitionStyle = .crossDissolve
         self.present(myAlert, animated: true, completion: nil)
     }
-    
-    
-    
+
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }

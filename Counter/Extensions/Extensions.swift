@@ -47,10 +47,10 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         {
             return UITableViewCell()
         }
-        
-         let event = eventController.events[indexPath.row] //
+        let event = eventController.events[indexPath.row]
+
         cell.event = event
-        
+    
         return cell
  
     }

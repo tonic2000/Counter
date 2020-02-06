@@ -28,9 +28,6 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         return range.location < 40
     }
 
-
-   
-    
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var iconTextView: UITextView!
     @IBOutlet weak var letterTextView: UITextView!
@@ -70,14 +67,14 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     
     func updateView() {
         guard let event = event else {
-                   title = "Add new event"
-                   return }
-               
-               title = event.name
-               eventNameTextField.text = event.name
-               letterTextView.text = event.letterContent
-               iconTextView.text = event.emoji
-               datePicker.date = event.date
+            title = "Add new event"
+            return }
+        
+        title = event.name
+        eventNameTextField.text = event.name
+        letterTextView.text = event.letterContent
+        iconTextView.text = event.emoji
+        datePicker.date = event.date
     }
     
     

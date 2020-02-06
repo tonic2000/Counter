@@ -11,28 +11,20 @@ import UIKit
 import MessageUI
 
 class MainVC: UIViewController, NewEventTableViewControllerDelegate {
-    
-    
-  
-    
+
     @IBOutlet weak var addButton: UIButton!
-    
     @IBOutlet weak var sortButton: UIBarButtonItem!
-    
-    
+
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     func didReceivedNewEvent(name: String, emoji: String, content: String, date: Date, dayleft: Double) {
 //        eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
-        
         print(eventController.events.count)
         eventTableView.reloadData()
     }
 
-
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var eventTableView: UITableView!
-    
-    
+
     let eventController = EventController()
     var menuShowing = false 
     var event: Event?
@@ -53,12 +45,9 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         
          sortButton.isEnabled = eventController.events.count > 1 ? true : false
         setUpForMenuView()
-        
-       
-        
+     
    //MARK: - Hide row when not in used.
  eventTableView.tableFooterView = UIView()
-     
         
     }
     
@@ -212,10 +201,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         let urlStr = "https://apps.apple.com/us/developer/thinh-nguyen/id1475297118"
         UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
     }
-    
-    
-   
-    
+
 }
 
 
