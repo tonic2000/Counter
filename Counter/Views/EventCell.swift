@@ -9,51 +9,63 @@
 import UIKit
 import Foundation
 
-class EventCell: UITableViewCell  {
-    var countdownTimer : Timer?
-    
+protocol EventCellDelegate: AnyObject {
+    func updateTimer2()
+}
+
+
+class EventCell: UITableViewCell   {
+
+    var countdownTimer :Timer?
     let dateFormatter  = Helper.createDateFormatter(format:" E, d MMM yyyy")
     
+    weak var delegate : EventCellDelegate?
     
+    var countdown = EventDetailVC()
     
     private  func updateViews() {
         guard let event = event else { return }
-         startTimer()
+        startTimer()
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
-       
+        
         eventDateLabel.text = dateFormatter.string(from: event.date)
-//        eventDaysLeft.text = event.daysLeft > 0.0 ? updateTime() : "☑️"
+        eventDaysLeft.text = event.daysLeft > 0.0 ? updateTimer() : "☑️"
         eventDaysLeft.backgroundColor = UIColor(displayP3Red: 176/255, green: 196/255, blue: 222/255, alpha: 1.0)
-      
-       updateTime()
-      
+        if event.daysLeft == 0.0 {
+             countdown.countdownTimer?.invalidate()
+            countdownTimer?.invalidate()
+         
+        }
     }
+    
+    
    private func startTimer() {
     
     countdownTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
-                                             selector: #selector(updateTime),
+                                             selector: #selector(updateTimer),
                                              userInfo: nil,
                                              repeats: true)
    
     }
     
-    @objc func updateTime()  {
-        
+    @objc func updateTimer() -> String  {
+        guard let futureDate = event?.date else { return ""}
+        guard let daysLeft = event?.daysLeft else { return  ""}
         let currentDate = Date()
         let calendar = Calendar.current
-        let diffDateComponents = calendar.dateComponents([.day,.hour,.minute,.second], from: currentDate,to: event!.date)
+        let diffDateComponents = calendar.dateComponents([.day,.hour,.minute,.second], from: currentDate,to: futureDate)
 
-        switch Int(event!.daysLeft) {
+        switch Int(daysLeft) {
             
             // MARK: - TODO
         case  ...0 :
             eventDaysLeft.text = "☑️"
-            
-            countdownTimer?.invalidate()
+           
             countdownTimer = nil
-            
+            countdownTimer?.invalidate()
+
         case 0...59:
             eventDaysLeft.text = "\(diffDateComponents.second!) seconds left."
         case 60...3599:
@@ -63,21 +75,22 @@ class EventCell: UITableViewCell  {
         case let x where x >= 86400 :
             eventDaysLeft.text = "\(diffDateComponents.day!) days left."
         default:
-            eventDaysLeft.text = "☑️"
-            countdownTimer?.invalidate()
+
             break
         }
-        if diffDateComponents.second == 0  &&
-                  diffDateComponents.minute == 0 &&
-                  diffDateComponents.hour == 0 &&
-                  diffDateComponents.day == 0 &&
-                  diffDateComponents.month == 0 &&
-                  diffDateComponents.year == 0
+        if     diffDateComponents.year == 0 &&
+            diffDateComponents.day == 0 && 
+            diffDateComponents.second == 0  &&
+            diffDateComponents.minute == 0 &&
+            diffDateComponents.hour == 0 &&
+            diffDateComponents.day == 0
               {
                   self.countdownTimer?.invalidate()
-                  self.countdownTimer = nil }
+                  self.countdownTimer = nil
+                
+        }
         
-       
+        return eventDaysLeft.text ?? "☑️"
     }
 
     
@@ -91,7 +104,6 @@ class EventCell: UITableViewCell  {
      var event: Event? {
          didSet {
              updateViews()
-  
          }
      }
     
