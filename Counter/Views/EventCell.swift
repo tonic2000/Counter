@@ -9,39 +9,38 @@
 import UIKit
 import Foundation
 
-protocol EventCellDelegate: AnyObject {
-    func updateTimer2()
-}
+class EventCell: UITableViewCell  {
 
 
-class EventCell: UITableViewCell   {
-
+    var countdown = EventDetailVC()
     var countdownTimer :Timer?
     let dateFormatter  = Helper.createDateFormatter(format:" E, d MMM yyyy")
-    
-    weak var delegate : EventCellDelegate?
-    
-    var countdown = EventDetailVC()
-    
     private  func updateViews() {
+        
+        
         guard let event = event else { return }
-        startTimer()
+        updateTimer()
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
-        
         eventDateLabel.text = dateFormatter.string(from: event.date)
         eventDaysLeft.text = event.daysLeft > 0.0 ? updateTimer() : "☑️"
+        
         eventDaysLeft.backgroundColor = UIColor(displayP3Red: 176/255, green: 196/255, blue: 222/255, alpha: 1.0)
-        if event.daysLeft == 0.0 {
-             countdown.countdownTimer?.invalidate()
+        
+        if event.daysLeft <= 0.0 {
+            countdown.countdownTimer?.invalidate()
             countdownTimer?.invalidate()
-         
+            countdownTimer = nil
+            countdown.countdownTimer = nil
         }
+        if countdownTimer == nil {
+            startTimer()
+        }
+        
     }
-    
-    
+
    private func startTimer() {
-    
+  
     countdownTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
                                              selector: #selector(updateTimer),
@@ -53,19 +52,24 @@ class EventCell: UITableViewCell   {
     @objc func updateTimer() -> String  {
         guard let futureDate = event?.date else { return ""}
         guard let daysLeft = event?.daysLeft else { return  ""}
+        
         let currentDate = Date()
+        
         let calendar = Calendar.current
         let diffDateComponents = calendar.dateComponents([.day,.hour,.minute,.second], from: currentDate,to: futureDate)
-
+       
+ 
+       //MARK: - TODO
+        
         switch Int(daysLeft) {
-            
-            // MARK: - TODO
+  
         case  ...0 :
-            eventDaysLeft.text = "☑️"
-           
-            countdownTimer = nil
+            countdown.countdownTimer?.invalidate()
             countdownTimer?.invalidate()
-
+            countdownTimer = nil
+            countdown.countdownTimer = nil
+            eventDaysLeft.text = "☑️"
+            
         case 0...59:
             eventDaysLeft.text = "\(diffDateComponents.second!) seconds left."
         case 60...3599:
@@ -78,16 +82,20 @@ class EventCell: UITableViewCell   {
 
             break
         }
-        if     diffDateComponents.year == 0 &&
-            diffDateComponents.day == 0 && 
-            diffDateComponents.second == 0  &&
-            diffDateComponents.minute == 0 &&
-            diffDateComponents.hour == 0 &&
-            diffDateComponents.day == 0
-              {
-                  self.countdownTimer?.invalidate()
-                  self.countdownTimer = nil
-                
+        
+        if  diffDateComponents.year ?? 0 <= 0 &&
+            diffDateComponents.day ?? 0 <= 0 &&
+            diffDateComponents.second ?? 0 <= 0  &&
+            diffDateComponents.minute ?? 0 <= 0 &&
+            diffDateComponents.hour ?? 0 <= 0 &&
+            diffDateComponents.day ?? 0 <= 0
+        {
+            eventDaysLeft.text = "☑️"
+            countdown.countdownTimer?.invalidate()
+            countdownTimer?.invalidate()
+            countdownTimer = nil
+            countdown.countdownTimer = nil
+            
         }
         
         return eventDaysLeft.text ?? "☑️"
@@ -100,12 +108,18 @@ class EventCell: UITableViewCell   {
     @IBOutlet weak var eventDaysLeft: UILabel!
     
     
-  
-     var event: Event? {
-         didSet {
-             updateViews()
-         }
-     }
+  //
+    var event: Event? {
+        didSet {
+            if event?.daysLeft ?? 0.0 <= 0.0 {
+                countdownTimer?.invalidate()
+                countdown.countdownTimer?.invalidate()
+                eventDaysLeft.text = "☑️"
+            }
+            updateViews()
+            
+        }
+    }
     
      
    

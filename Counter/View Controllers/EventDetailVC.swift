@@ -133,7 +133,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
                 self.countdownTimer?.invalidate()
                 
                 self.dismiss(animated: true, completion: nil)
-                self.delegate2?.didEndTimer()
+//                self.delegate2?.didEndTimer()
             }
         }
       
@@ -187,6 +187,7 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+        delegate2?.didEndTimer()
     }
     
     @IBOutlet weak var backButtonBackgroundView: UIView!

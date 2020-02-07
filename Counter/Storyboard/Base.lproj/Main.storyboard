@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wXt-Uc-oy4">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -259,7 +259,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="😌" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght" customClass="EmojiKeyboard" customModule="Counter" customModuleProvider="target">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="😼" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-2d-ght" customClass="EmojiKeyboard" customModule="Counter" customModuleProvider="target">
                                                     <rect key="frame" x="157" y="19.666666666666671" width="100" height="100"/>
                                                     <color key="backgroundColor" red="0.1488651037" green="0.19681230189999999" blue="0.28205996750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>

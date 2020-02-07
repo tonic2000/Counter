@@ -72,7 +72,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             guard  let sender = (sender as? EventCell) else { return }
             guard let indexPath = eventTableView.indexPath(for: sender) else { return } //
             let event = eventController.events[indexPath.row]
-            destVC.delegate2 = self
+
             destVC.event = event
          
         case Helper.swipeLeftSegue :
