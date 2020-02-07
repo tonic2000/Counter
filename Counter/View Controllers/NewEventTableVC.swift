@@ -18,11 +18,11 @@ private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy")
 
 class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
 
-    
+    static let  shared = NewEventTableVC()
     var event: Event?
-      var eventController : EventController?
-        
-       weak var delegate: NewEventTableViewControllerDelegate?
+    var eventController : EventController?
+    
+    weak var delegate: NewEventTableViewControllerDelegate?
 //
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return range.location < 40
@@ -106,9 +106,9 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
               guard let content = letterTextView.text else { return }
               let pickedDate = datePicker.date
         
-              let daysLeft = Date.differ(lhs: pickedDate, rhs: Date())
-               
-              
+        let daysLeft = pickedDate.timeIntervalSinceNow
+                print(daysLeft)
+             
          if let event = event  {
             eventController?.update(event: event, name: name, content: content, date: pickedDate, emoji: emoji, daysLeft: daysLeft)
             
@@ -136,7 +136,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         content.body = "Message from the future: \(letterTextView.text ?? "Have a good day!")"
         content.sound = .defaultCritical
         
-        let interval = datePicker.date.timeIntervalSince(Date()) //
+        let interval = datePicker.date.timeIntervalSinceNow //
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: abs(interval) , repeats: false)
         

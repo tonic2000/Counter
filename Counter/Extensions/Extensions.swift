@@ -16,23 +16,23 @@ extension EventDetailVC: AlertViewControllerDelegate {
     }
 }
 
-extension Date {
-    static func differ(lhs:Date,rhs:Date) -> TimeInterval {
-        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-    }
-}
+//extension Date {
+//    static func differ(lhs:Date,rhs:Date) -> TimeInterval {
+//        return lhs.timeIntervalSinceNow - rhs.timeIntervalSinceNow
+//    }
+//}
 
-extension MainVC: EventDetailVCDelegate {
-    func didEndTimer() {
-     let new = eventController.events.filter {
-            $0.daysLeft != 0
-           
-            }
-         eventController.events = new
-         eventTableView.reloadData()
-        
-    }
-}
+//extension MainVC: EventDetailVCDelegate {
+////    func didEndTimer() {
+////     let new = eventController.events.filter {
+////            $0.daysLeft != 0
+////           
+////            }
+////         eventController.events = new
+////         eventTableView.reloadData()
+////        
+////    }
+//}
 
 // MARK: - TableView DataSource and Delegate
 
@@ -48,7 +48,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let event = eventController.events[indexPath.row]
-
+        
         cell.event = event
     
         return cell
