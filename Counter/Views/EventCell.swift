@@ -15,11 +15,13 @@ class EventCell: UITableViewCell  {
     var countdown = EventDetailVC()
     var countdownTimer :Timer?
     let dateFormatter  = Helper.createDateFormatter(format:" E, d MMM yyyy")
+    
     private  func updateViews() {
         
         
         guard let event = event else { return }
-        updateTimer()
+        
+//        updateTimer()
         eventNameLabel.text = event.name
         emojiLabel.text = event.emoji
         eventDateLabel.text = dateFormatter.string(from: event.date)

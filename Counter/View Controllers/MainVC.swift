@@ -31,12 +31,35 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
        
    //MARK: - App Life Cycle
     
-   override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(animated)
-       eventTableView.reloadData()
-       sortButton.isEnabled = eventController.events.count > 1 ? true : false
-      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-   }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        eventTableView.reloadData()
+        sortButton.isEnabled = eventController.events.count > 1 ? true : false
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        animateTable()
+    }
+    //MARK: - TODO : Animate table view
+    
+    func animateTable() {
+      eventTableView.reloadData()
+      
+      let cells = eventTableView.visibleCells
+      let tableHeight = eventTableView.bounds.size.height
+      
+      // move all cells to the bottom of the screen
+      for cell in cells {
+        cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
+      }
+      
+      // move all cells from bottom to the right place
+      var index = 0
+      for cell in cells {
+        UIView.animate(withDuration: 2, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
+          cell.transform = CGAffineTransform(translationX: 0, y: 0)
+          }, completion: nil)
+        index += 1
+      }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
