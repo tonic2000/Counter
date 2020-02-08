@@ -9,7 +9,8 @@ Fetch funny quotes from the internet.
 
 Add pulse animation to image view.
 
-
+# App Store Download: 
+https://apps.apple.com/us/app/countx/id1498108396
 
 
  ![](counterapp.gif)
