@@ -21,9 +21,9 @@ Counter App help people keep track of incoming events and have a good laugh by r
 
 
 # Future plan: 
-Fetch funny quotes from the internet.
+- Fetch funny quotes from the internet.
 
-Add pulse animation to image view.
+- Add pulse animation to image view.
 
 # App Store Download: 
 https://apps.apple.com/us/app/countx/id1498108396
