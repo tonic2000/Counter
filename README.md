@@ -4,6 +4,22 @@
 # Usage:
 Counter App help people keep track of incoming events and have a good laugh by reading funny quotes.
 
+# Features:
+- Read funny quotes.
+
+
+- Track time. 
+
+
+- Push notifications.
+
+
+- Sort events.
+
+
+- Share/ Save events via email/text.
+
+
 # Future plan: 
 Fetch funny quotes from the internet.
 
