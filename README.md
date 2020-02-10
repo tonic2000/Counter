@@ -1,6 +1,6 @@
 # Counter
 
-                Counter - Event Tracking App ( Lambda School Build Week 1 ).
+                Counter - Event Tracking App ( Lambda School Build Week 1 ). Febuary 7, 2020
 # Usage:
 Counter App help people keep track of incoming events and have a good laugh by reading funny quotes.
 
