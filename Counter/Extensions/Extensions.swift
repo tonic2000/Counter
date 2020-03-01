@@ -80,6 +80,28 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     
     
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let label = UILabel()
+        label.text = "No events to display."
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        view.addSubview(label)
+        NSLayoutConstraint.activate([
+        label.topAnchor.constraint(equalTo: eventTableView.safeAreaLayoutGuide.topAnchor,constant: 16),
+        label.centerXAnchor.constraint(equalTo: eventTableView.centerXAnchor)
+        
+        ])
+    
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return eventController.events.count == 0 ? 150 : 0
+    }
+    
+    
      func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
        
            let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
