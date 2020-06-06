@@ -30,7 +30,7 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
+                                                <integer key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -214,6 +214,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="jiJ-3D-8LU" id="lJb-kD-saA"/>
+                        <outlet property="bottomView" destination="3ou-Xs-c5F" id="GRJ-xs-8Py"/>
                         <outlet property="eventTableView" destination="yXr-cl-gLb" id="i97-N7-ixQ"/>
                         <outlet property="menuView" destination="Q3o-s9-PrP" id="VOa-kD-3Hq"/>
                         <outlet property="menuViewLeadingConstraint" destination="esQ-2r-ISv" id="6Ib-Oi-HHJ"/>

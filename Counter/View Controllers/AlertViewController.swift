@@ -29,8 +29,6 @@ class AlertViewController: UIViewController , UIGestureRecognizerDelegate {
         quoteLabel.text = Quotes.quotes.randomElement()
         
     }
-    
-
     @objc func handleTap() {
         dismiss(animated: true, completion: nil)
         delegate?.didTapOnScreen()

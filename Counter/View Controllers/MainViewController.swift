@@ -18,6 +18,8 @@ class MainViewController: UIViewController, NewEventTableViewControllerDelegate 
     @IBOutlet weak var sortButton: UIBarButtonItem!
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    
     @IBOutlet weak var eventTableView: UITableView! {
         didSet {
             eventTableView.dataSource = self
@@ -173,13 +175,17 @@ class MainViewController: UIViewController, NewEventTableViewControllerDelegate 
             })
             eventTableView.alpha = 1.0
             addButton.alpha = 1.0
+            bottomView.alpha = 1.0
             addButton.isEnabled = true
+            sortButton.isEnabled = true
             navigationController?.navigationBar.alpha = 1.0
             
         } else {
             // Slide out
             addButton.alpha = 0.5
             addButton.isEnabled = false
+            sortButton.isEnabled = false
+            bottomView.alpha = 0.5
             menuViewLeadingConstraint.constant = 0
             navigationController?.navigationBar.alpha = 0.5
             eventTableView.alpha = 0.5

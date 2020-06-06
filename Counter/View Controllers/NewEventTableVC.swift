@@ -124,7 +124,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
-        content.title = "Hi there, how is it going?."
+        content.title = "Today is \(eventNameTextField.text!)."
         content.body = "Message from the future: \(letterTextView.text ?? "Have a good day!")"
         content.sound = .defaultCritical
         
