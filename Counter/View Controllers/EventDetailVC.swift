@@ -133,7 +133,6 @@ class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
                 self.countdownTimer?.invalidate()
                 
                 self.dismiss(animated: true, completion: nil)
-//                self.delegate2?.didEndTimer()
             }
         }
       

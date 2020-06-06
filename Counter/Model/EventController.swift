@@ -77,18 +77,16 @@ class EventController  {
     
     
     func update(event: Event, name: String, content: String?,date: Date,emoji: String,daysLeft: Double) {
-         guard  let indexPath = events.firstIndex(of: event) else { return }
-           
-           event.name = name
-           event.letterContent = content
-           event.date = date
-           event.emoji = emoji
-           event.daysLeft = daysLeft
-           
-           events.remove(at: indexPath)
-           events.insert(event, at: indexPath)
+        guard  let indexPath = events.firstIndex(of: event) else { return }
+        
+        event.name = name
+        event.letterContent = content
+        event.date = date
+        event.emoji = emoji
+        event.daysLeft = daysLeft
+        
+        events.remove(at: indexPath)
+        events.insert(event, at: indexPath)
         saveToPersistStore()
-       }
-
-    
+    }
 }

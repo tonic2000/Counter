@@ -35,7 +35,5 @@ class Helper {
            } else {
               UIApplication.shared.open(twitterUrlWeb, options: [:], completionHandler: nil)
            }
-    }
-    
-    
+    }  
 }

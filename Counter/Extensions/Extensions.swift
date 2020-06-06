@@ -18,7 +18,7 @@ extension EventDetailVC: AlertViewControllerDelegate {
 
 // MARK: - TableView DataSource and Delegate
 
-extension MainVC: UITableViewDataSource, UITableViewDelegate {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return eventController.events.count
        
@@ -66,7 +66,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let modifyAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.eventController.deleteEvent(event: self.eventController.events[indexPath.row])
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             
             success(true)
         })
@@ -79,7 +79,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    
+    //MAKR: - Footer View .
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
@@ -104,21 +104,21 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
      func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
        
-           let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-               
-               self.performSegue(withIdentifier: Helper.swipeLeftSegue, sender: indexPath) // "A-ha" 1
-                      success(true)
-                  })
-                
-           modifyAction.backgroundColor = UIColor(displayP3Red: 216/255, green: 191/255, blue: 216/255, alpha: 1.0)
-           modifyAction.image = UIImage(systemName: "gobackward")
-              
-                  return UISwipeActionsConfiguration(actions: [modifyAction])
+        let modifyAction = UIContextualAction(style: .normal, title:  "Update", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            self.performSegue(withIdentifier: Helper.swipeLeftSegue, sender: indexPath) // "A-ha" 1
+            success(true)
+        })
+        
+        modifyAction.backgroundColor = UIColor(displayP3Red: 216/255, green: 191/255, blue: 216/255, alpha: 1.0)
+        modifyAction.image = UIImage(systemName: "gobackward")
+        
+        return UISwipeActionsConfiguration(actions: [modifyAction])
        }
  
 }
 //MARK:- Send Email
-extension MainVC: MFMailComposeViewControllerDelegate {
+extension MainViewController: MFMailComposeViewControllerDelegate {
     func sendEmail() {
            if MFMailComposeViewController.canSendMail() {
                let mail = MFMailComposeViewController()
@@ -145,7 +145,7 @@ extension MainVC: MFMailComposeViewControllerDelegate {
          default:
             controller.dismiss(animated: true)
          }
-       }
+    }
 }
 
 

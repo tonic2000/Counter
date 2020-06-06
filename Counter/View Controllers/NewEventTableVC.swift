@@ -85,17 +85,9 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     @IBAction func switchTapped(_ sender: UISwitch) {
         
         dateFormatter.dateFormat = sender.isOn ?  "E, d MMM yyyy HH:mm:ss" : "E, d MMM yyyy"
-        
-        if sender.isOn {
-            datePicker.datePickerMode = .time
-           
-        } else {
-            datePicker.datePickerMode = .date
-        }
+        datePicker.datePickerMode = sender.isOn ?  .time : .date
     }
     
-    
-
     @IBAction func pickerChange(_ sender: UIDatePicker) {
         dateLabel.text = dateFormatter.string(from: sender.date)
     }
@@ -149,10 +141,6 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
                 print("Error: \(error?.localizedDescription ?? "")")
             }
         }
-        
-        
     }
-    
-    
 }
 

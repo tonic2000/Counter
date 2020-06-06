@@ -92,7 +92,4 @@ struct Quotes {
     "If you act like you've only got fifteen minutes, it will take all day. Act like you've got all day, it will take fifteen minutes. ~ Monty Roberts",
 
     ]
-    
-    
-    
 }

@@ -35,5 +35,4 @@ class AlertViewController: UIViewController , UIGestureRecognizerDelegate {
         dismiss(animated: true, completion: nil)
         delegate?.didTapOnScreen()
     }
-
 }

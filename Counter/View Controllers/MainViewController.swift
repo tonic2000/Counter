@@ -10,27 +10,41 @@
 import UIKit
 import MessageUI
 
-class MainVC: UIViewController, NewEventTableViewControllerDelegate {
+class MainViewController: UIViewController, NewEventTableViewControllerDelegate {
 
+    //MARK:-IBOutlets
+    
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var sortButton: UIBarButtonItem!
-
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var eventTableView: UITableView! {
+        didSet {
+            eventTableView.dataSource = self
+            eventTableView.delegate = self
+            eventTableView.tableFooterView = UIView()
+        }
+    }
+    
+    let eventController = EventController()
+    private var menuShowing = false
+    private var event: Event?
+    
+    
     func didReceivedNewEvent(name: String, emoji: String, content: String, date: Date, dayleft: Double) {
-//        eventController.createEvent(name: name, emoji: emoji, date: date, content: content, daysLeft: dayleft)
-        print(eventController.events.count)
         eventTableView.reloadData()
     }
-
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var eventTableView: UITableView!
-
-    let eventController = EventController()
-    var menuShowing = false 
-    var event: Event?
        
-   //MARK: - App Life Cycle
+   //MARK: - View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+  
+        sortButton.isEnabled = eventController.events.count > 1 ? true : false
+        setUpForMenuView()
+       
+        //MARK: - Hide row when not in used.
     
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         eventTableView.reloadData()
@@ -40,7 +54,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     }
     //MARK: - TODO : Animate table view
     
-    func animateTable() {
+  private func animateTable() {
       eventTableView.reloadData()
       
       let cells = eventTableView.visibleCells
@@ -59,19 +73,6 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
           }, completion: nil)
         index += 1
       }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        eventTableView.dataSource = self
-        eventTableView.delegate = self
-        
-         sortButton.isEnabled = eventController.events.count > 1 ? true : false
-        setUpForMenuView()
-     
-   //MARK: - Hide row when not in used.
- eventTableView.tableFooterView = UIView()
-        
     }
     
     private func setUpForMenuView() {
@@ -105,11 +106,7 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
                        destVC.event = event
                        destVC.eventController = eventController
             
-            
-            //MARK:- TODO 
-        default:
-            break
-       
+        default: break
         }
     }
 
@@ -126,9 +123,8 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
     
     
     @IBAction func addTapped(_ sender: UIButton) {
-        //Segue 
+        print("He")
     }
-    
     
     @IBAction func sortTapped(_ sender: UIBarButtonItem) {
         
@@ -141,8 +137,6 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             eventTableView.isEditing = false
              addButton.isEnabled = true
         }
-       
-       
     }
     
     private func showAlert() {
@@ -161,12 +155,10 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         present(ac, animated: true, completion: nil)
     }
     
-    
     func sortTime(action: UIAlertAction)  {
         
         eventController.sortTime()
         self.eventTableView.reloadData()
-          
     }
     
    // MARK: - Side menu
@@ -181,22 +173,21 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
             })
             eventTableView.alpha = 1.0
             addButton.alpha = 1.0
+            addButton.isEnabled = true
             navigationController?.navigationBar.alpha = 1.0
             
         } else {
             // Slide out
             addButton.alpha = 0.5
+            addButton.isEnabled = false
             menuViewLeadingConstraint.constant = 0
             navigationController?.navigationBar.alpha = 0.5
             eventTableView.alpha = 0.5
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.layoutIfNeeded()
             })
-            
         }
-        
         menuShowing.toggle()
-        
     }
     
    private func moveCell(action: UIAlertAction) {
@@ -208,8 +199,6 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         default:
             sortButton.title = "Sort"
         }
-               
-         
     }
   
     @IBAction func contactTapped(_ sender: UIButton) {
@@ -224,7 +213,6 @@ class MainVC: UIViewController, NewEventTableViewControllerDelegate {
         let urlStr = "https://apps.apple.com/us/developer/thinh-nguyen/id1475297118"
         UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
     }
-
 }
 
 
