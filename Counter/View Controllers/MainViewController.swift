@@ -116,6 +116,8 @@ class MainViewController: UIViewController {
     addButton.alpha = 1.0
     bottomView.alpha = 1.0
     navigationController?.navigationBar.alpha = 1.0
+    addButton.isEnabled = true
+    sortButton.isEnabled = true
     UIView.animate(withDuration: 0.2, animations: {
       self.view.layoutIfNeeded()
     })
