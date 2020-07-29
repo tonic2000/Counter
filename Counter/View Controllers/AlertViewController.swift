@@ -9,31 +9,27 @@
 import UIKit
 
 protocol AlertViewControllerDelegate : AnyObject {
-    func didTapOnScreen()
+  func didTapOnScreen()
 }
 
-
 class AlertViewController: UIViewController , UIGestureRecognizerDelegate {
-
-  weak  var delegate: AlertViewControllerDelegate?
+  
+  weak var delegate: AlertViewControllerDelegate?
+  
+  @IBOutlet weak var quoteView: UIView!
+  @IBOutlet weak var quoteLabel: UILabel!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+    tap.delegate = self
+    view.addGestureRecognizer(tap)
     
-    @IBOutlet weak var quoteView: UIView!
-    @IBOutlet weak var quoteLabel: UILabel!
+    quoteLabel.text = Quotes.quotes.randomElement()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tap.delegate = self
-        view.addGestureRecognizer(tap)
-
-        quoteLabel.text = Quotes.quotes.randomElement()
-        
-    }
-    
-
-    @objc func handleTap() {
-        dismiss(animated: true, completion: nil)
-        delegate?.didTapOnScreen()
-    }
-
+  }
+  @objc func handleTap() {
+    dismiss(animated: true, completion: nil)
+    delegate?.didTapOnScreen()
+  }
 }
