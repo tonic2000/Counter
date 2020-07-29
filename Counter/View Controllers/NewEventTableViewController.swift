@@ -10,15 +10,12 @@ import UIKit
 
 private let dateFormatter = Helper.createDateFormatter(format: "E, d MMM yyyy")
 
-class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDelegate , UIGestureRecognizerDelegate {
+class NewEventTableViewController: UITableViewController, UIGestureRecognizerDelegate {
   
-  static let  shared = NewEventTableVC()
+  static let  shared = NewEventTableViewController()
   var event: Event?
   var eventController : EventController?
   
-  public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    return range.location < 40
-  }
   
   @IBOutlet weak var eventNameTextField: UITextField!
   @IBOutlet weak var iconTextView: UITextView!
@@ -43,7 +40,7 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     super.viewDidLoad()
     iconTextView.textContainer.maximumNumberOfLines = 1
     updateView()
-    
+    iconTextView.delegate = self
     
     eventNameTextField.becomeFirstResponder()
     eventNameTextField.delegate = self
@@ -89,8 +86,8 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
     guard let emoji = iconTextView.text else { return }
     guard let content = letterTextView.text else { return }
     let pickedDate = datePicker.date
-    
     let daysLeft = pickedDate.timeIntervalSinceNow
+    
     print(daysLeft)
     
     if let event = event  {
@@ -130,3 +127,16 @@ class NewEventTableVC: UITableViewController , UITextFieldDelegate, UITextViewDe
   }
 }
 
+extension NewEventTableViewController: UITextFieldDelegate {
+  public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    return range.location < 40
+  }
+  
+}
+extension NewEventTableViewController: UITextViewDelegate {
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+    let numberOfChars = newText.count
+    return numberOfChars < 2   // 1 Icon max
+  }
+}

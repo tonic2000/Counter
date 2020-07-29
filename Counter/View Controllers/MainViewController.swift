@@ -85,13 +85,13 @@ class MainViewController: UIViewController {
     
     switch segue.identifier  {
       case Helper.addButtonSegue:
-        guard  let destVC = segue.destination as? NewEventTableVC else { return }
+        guard  let destVC = segue.destination as? NewEventTableViewController else { return }
         
         destVC.eventController = eventController
         
       case Helper.clickCellSegue:
         
-        guard let destVC = segue.destination as? EventDetailVC else { return }
+        guard let destVC = segue.destination as? EventDetailViewController else { return }
         guard  let sender = (sender as? EventCell) else { return }
         guard let indexPath = eventTableView.indexPath(for: sender) else { return } 
         let event = eventController.events[indexPath.row]
@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
         
       case Helper.swipeLeftSegue :
         guard let index = sender as? IndexPath,
-              let destVC = segue.destination as? NewEventTableVC else { return }
+              let destVC = segue.destination as? NewEventTableViewController else { return }
         let event = eventController.events[index.row]
         destVC.event = event
         destVC.eventController = eventController

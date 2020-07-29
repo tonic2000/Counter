@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Event : Codable , Comparable {
   static func == (lhs: Event, rhs: Event) -> Bool {
     return lhs.name == rhs.name

@@ -8,13 +8,11 @@
 
 import UIKit
 
-
 protocol EventDetailVCDelegate : AnyObject {
   func didEndTimer()
 }
 
-
-class EventDetailVC: UIViewController , UIGestureRecognizerDelegate {
+class EventDetailViewController: UIViewController , UIGestureRecognizerDelegate {
   
   //MARK:- IBOutlets-
   

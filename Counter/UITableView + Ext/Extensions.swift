@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MessageUI
 
-extension EventDetailVC: AlertViewControllerDelegate {
+extension EventDetailViewController: AlertViewControllerDelegate {
   func didTapOnScreen() {
     view.alpha = 1.0
   }
@@ -26,9 +26,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell123", for: indexPath) as? EventCell else
-    {
-      return UITableViewCell()
-    }
+    { return UITableViewCell() }
     let event = eventController.events[indexPath.row]
     
     cell.event = event

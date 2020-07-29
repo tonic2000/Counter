@@ -11,7 +11,7 @@ import Foundation
 
 class EventCell: UITableViewCell {
   
-  var countdown = EventDetailVC()
+  var countdown = EventDetailViewController()
   var countdownTimer :Timer?
   let dateFormatter  = Helper.createDateFormatter(format:" E, d MMM yyyy")
   
