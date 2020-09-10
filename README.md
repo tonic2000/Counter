@@ -32,7 +32,9 @@ https://apps.apple.com/us/app/countx/id1498108396
  ![](counterapp.gif)
 
 
-
+# Requirement:
+- Xcode 11 
+- iOS 13
 
 
 
