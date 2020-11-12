@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class EmojiKeyboard: UITextView {
-  
-  // required for iOS 13
-  override var textInputContextIdentifier: String? { "" } // return non-nil to show the Emoji keyboard ¯\_(ツ)_/¯
-  
-  override var textInputMode: UITextInputMode? {
-    for mode in UITextInputMode.activeInputModes {
-      if mode.primaryLanguage == "emoji" {
-        return mode
-      }
+final class EmojiKeyboard: UITextView {
+    
+    // required for iOS 13
+    override var textInputContextIdentifier: String? { "" } // return non-nil to show the Emoji keyboard ¯\_(ツ)_/¯
+    
+    override var textInputMode: UITextInputMode? {
+        for mode in UITextInputMode.activeInputModes {
+            if mode.primaryLanguage == "emoji" {
+                return mode
+            }
+        }
+        return nil
     }
-    return nil
-  }
 }
