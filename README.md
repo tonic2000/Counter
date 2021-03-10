@@ -14,10 +14,10 @@ Counter helps people keep track of incoming events and have a good time by readi
 
 - Sort events.
 
-- Share via email/text.
+- Share event via email/text.
 
 # Future plan: 
-- Fetch funny quotes from the internet.
+- Fetch quotes from the Internet.
 
 - Add pulse animation to image view.
 
