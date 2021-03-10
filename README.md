@@ -21,11 +21,12 @@ Counter helps people keep track of incoming events and have a good time by readi
 
 - Add pulse animation to image view.
 
-# App Store Download: 
-https://apps.apple.com/us/app/countx/id1498108396
+# Visualization:
 
  ![](counterapp.gif)
 
+# App Store Download: 
+https://apps.apple.com/us/app/countx/id1498108396
 
 # Requirement:
 - Xcode 11 
