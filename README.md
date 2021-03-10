@@ -30,7 +30,3 @@ https://apps.apple.com/us/app/countx/id1498108396
 # Requirement:
 - Xcode 11 
 - iOS 13
-
-
-                                      Copyright © 2020 Nick Nguyen. All rights reserved.
-
